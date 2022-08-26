@@ -89,7 +89,7 @@
   %
   A solution to this problem would be of pivotal importance, for instance, to enable the automatic comparison between a set of different knowledge representations, paving the way for the development of parameter autotuning algorithms for knowledge extractors.
   %
-  In this paper we discuss in details the criticalities about readability assessment, providing extracted knowledge examples from the literature and highlighting the most puzzling issues.
+  In this paper we discuss in details the criticalities about readability assessment, taking into account the most common knowledge representations and highlighting the most puzzling issues.
 \end{abstract}
 
 %%
@@ -171,7 +171,7 @@ For this reason it is a quite challenging task the quantitative assessment of kn
 %
 The lacking of such a score prevents the design and implementation of procedures to automatically tune extractor parameters, since a robust method to compare the extractors' outputs is currently missing.
 %
-Accordingly, in the following Sections we provide a more detailed discussion about the readability assessment, highlighting the most challenging difficulties via knowledge extraction examples taken from the literature.
+Accordingly, in the following Section we provide a more detailed discussion about the readability assessment, highlighting the most challenging difficulties clustered on the basis of the knowledge representation chosen by extraction algorithms.
 
 \section{Evaluating Extracted Knowledge}
 
@@ -410,6 +410,20 @@ Even if the macrolevel knowledge complexity is quite easy to be assessed, the sa
 Different SKE algorithms adopt different notations and each one comes along its proper conciseness and human-interpretability degree.
 %
 Unfortunately, it is not possible to convert the various formats into a canonical, comparable notation and for this reason the problem of assigning a readability score to individual rules is a major open issue in the assessment of the extracted knowledge quality.
+
+\section{Conclusions}
+
+In this paper we analysed the most common formats and notations used to represent the knowledge extracted via SKE techniques from black-box models in order to highlight suitable metrics to evaluate the knowledge quality.
+%
+We showed that quality should encompass predictive performance, input space coverage and knowledge readability.
+%
+As for the latter, readability can be observed at a macrolevel -- as shape and complexity of the knowledge itself -- and at a microlevel---as shape and complexity of knowledge rules.
+%
+We showed that at a macrolevel the knowledge may be easily compared.
+%
+Conversely, we pointed out the most tricky characteristics of microlevel considerations, to favour further studies and discussion on the topic.
+%
+Our goal is to find a suitable metric to assess the knowledge quality in a fair, quantitative and objective manner, without neglecting its readability and our future works will be focused on this area.
 
 %\begin{figure}[h]
 %  \centering
