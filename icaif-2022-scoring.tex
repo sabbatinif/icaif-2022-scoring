@@ -38,7 +38,7 @@
 %%
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" to be used in page headers.
-\title{The Need of Evaluation Metrics for Symbolic Knowledge Extracted from Machine Learning Black Boxes}
+\title{The Need of Evaluation Metrics for Symbolic Knowledge Extracted from Machine Learning Black Boxes: Discussion Paper}
 
 %%
 %% The "author" command and its associated commands are used to define
@@ -81,15 +81,15 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  As opaque decision systems are being increasingly exploited in practically any application field, issues about their lack of human readability are a concrete source of concern for end-users wanting to apply them in critical domains.
+  As opaque decision systems are being increasingly exploited in almost any application field, issues about their lack of transparency and human readability are a concrete source of concern for end-users.
   %
-  Amongst the proposals available in the literature to associate human-interpretable knowledge with the accurate predictions provided by opaque models there are rule extraction techniques, able to obtain symbolic knowledge suitable for human comprehension.
+  Amongst existing proposals to associate human-interpretable knowledge with accurate predictions provided by opaque models, there are rule extraction techniques, capable of extracting symbolic knowledge out of an opaque model.
   %
-  However, the problem of objectively assessing in a quantitative way the readability degree of the extracted knowledge is still open.
+  However, how to assess quantitatively the level of readability of the extracted knowledge is still an open issue.
   %
-  A solution to this problem would be of pivotal importance, for instance, to enable the automatic comparison between a set of different knowledge representations, paving the way for the development of parameter autotuning algorithms for knowledge extractors.
+  Finding such a metric would be the key, for instance, to enable automatic comparison between a set of different knowledge representations, paving the way for the development of parameter autotuning algorithms for knowledge extractors.
   %
-  In this paper we discuss in details the criticalities about readability assessment, taking into account the most common knowledge representations and highlighting the most puzzling issues.
+  In this paper we discuss in detail the criticalities of readability assessment and evaluation, taking into account the most common knowledge representations while highlighting the most puzzling issues.
 \end{abstract}
 
 %%
@@ -124,34 +124,36 @@
 
 The ubiquitous presence of sub-symbolic machine learning predictors in the large majority of decision systems~\cite{rocha2012far} offers advantages as well as drawbacks.
 %
-Amongst the former, the enormous predictive capabilities of sub-symbolic predictors have to be mentioned.
+The formers include the accurate predictive capabilities of sub-symbolic predictors.
 %
-Predictive performance of models is usually proportional to their internal complexity, intended as amount of parameters to be trained and/or knowledge representation structure.
+However, predictive performances of models are usually proportional to their internal complexity, intended as amount of parameters to be trained and/or knowledge representation structure.
 %
-For instance, knowledge in deep neural network is represented as neuron weights and biases, that are too many to enable human inspection.
+For instance, knowledge in deep neural networks is represented as a huge number of neuron weights and biases---too many to enable human inspection.
 %
-From here the most severe disadvantage of sub-symbolic models, i.e., the lack of human interpretability.
+From here the most severe disadvantage of sub-symbolic models: the lack of human interpretability.
 %
-For this reason models of this kind are called \email{black boxes} (BB).
+For such a reason models of this kind are also called \email{black boxes} (BB).
+%
+When dealing with critical applications -- i.e., in medical or financial areas -- such a lack of human awareness is even more unacceptable and makes BB models impracticable.
 
-When dealing with critical applications -- i.e., in medical or financial areas -- such a lack of human awareness is not acceptable and makes BB models impracticable.
-%
 Different strategies are present in the literature to overcome this issue~\cite{guidotti2018survey}:
 %
 \begin{inlinelist}
 	\item rely on human-interpretable models, as shallow decision trees~\cite{Rudin2019}; or
 	\item apply symbolic knowledge extraction (SKE) techniques to the BB~\cite{KENNY2021103459}.
 \end{inlinelist}
+%
+While \textit{i)} is not always applicable, \textit{ii)} is gaining a momentum. The amount of SKE algorithms available in the literature is constantly increasing, also thanks to the software support provided by object-oriented frameworks for machine learning 
+%(e.g., Scikit-learn\footnote{\vurl{https://scikit-learn.org/stable}}~\cite{PedregosaVGMTGBPWDVPCBPD11} for Python or Smile\footnote{\vurl{https://haifengl.github.io}} for the Java Virtual Machine) 
+as well as to the developing of dedicated frameworks (e.g., \psyke{}~\cite{psyke-woa2021,psyke-ia2022,psyke-extraamas2022}).
 
-The amount of SKE algorithms available in the literature is constantly increasing, thanks to the software support provided by object-oriented frameworks for machine learning (e.g., Scikit-learn\footnote{\vurl{https://scikit-learn.org/stable}}~\cite{PedregosaVGMTGBPWDVPCBPD11} for Python or Smile\footnote{\vurl{https://haifengl.github.io}} for the Java Virtual Machine) as well as to the developing of dedicated frameworks (e.g., \psyke{}~\cite{psyke-woa2021,psyke-ia2022,psyke-extraamas2022}).
-
-SKE procedures belongs to two different paradigms~\cite{andrews1995survey}, i.e., they can be \emph{decompositional} if they inspect the internal structure of the BB or \emph{pedagogical} if they only observe the BB response to given input.
+SKE procedures belong to two different paradigms~\cite{andrews1995survey}: \textit{i)} they can be \emph{decompositional} -- if they inspect the internal structure of the BB -- \textit{i)} or \emph{pedagogical}---if they only observe the BB response to given input.
 %
 Since in decompositional methods type and structure of the BB play a fundamental role, they are usually not general-purpose and designed for specific models, for instance only neural networks with a fixed amount of hidden layers, as in the case of \textsc{ReFANN}~\cite{setiono2002extraction}.
 %
-Conversely, pedagogical approaches result to be suitable for any BB predictor.
+Conversely, pedagogical approaches are suitable for any BB predictor.
 %
-When SKE techniques mix elements of the two categories it is possible to define the approaches as \emph{eclectic}, however they may be considered enclosed in the decompositional set, since they require some sort of internal inspection.
+When SKE techniques mix elements of the two categories it is possible to define \emph{eclectic} approaches, which however may be considered decompositional, as they require some sort of internal inspection.
 
 Amongst the application areas of SKE there are financial~\cite{baesens2001building,baesens2003using,steiner2006using} and medical fields~\cite{bologna1997three,franco2007early,hayashi2000comparison}, but not only~\cite{setiono2011rule,sabbatini22LPFSKE,azcarraga2012keyword,hofmann2003rule}.
 %
@@ -159,105 +161,105 @@ Examples of extractors generally achieving good results are \cart{}~\cite{breima
 %
 Of course a number of alternatives are present in the literature~\cite{craven1994using,huysmans2006iter,barakat2005eclectic,martens2007comprehensible}, depending on the task at hand.
 %
-A common trait of every extractor is given by their output, that is some sort of human-interpretable knowledge.
+A common trait of every extractor is the output, which has to be some sort of human-interpretable knowledge.
 %
 The knowledge usually follows a list or tree representation, where each item (leaf) of the list (tree) corresponds to a specific rule having predictive power.
 %
-The human-readability extent of a knowledge is bounded to the number of rules it contains and, recursively, to the readability extent of each rule, in turn.
+The level of human-readability of the extracted knowledge is bounded to the number of rules it contains and, recursively, to the readability of each rule, in turn.
 %
-Indeed, rules may follow several formats with different degrees of conciseness even when having the same semantics.
+Indeed, rules may follow several formats with different levels of conciseness even when having the same semantics.
 %
-For this reason it is a quite challenging task the quantitative assessment of knowledge readability through an unbiased score.
+For this reason, the quantitative assessment of knowledge readability -- through an unbiased score and relative metric -- is a quite challenging task.
 %
-The lacking of such a score prevents the design and implementation of procedures to automatically tune extractor parameters, since a robust method to compare the extractors' outputs is currently missing.
+The lacking of such a metric prevents the design and implementation of procedures to automatically tune extractor parameters since unbiased comparison of extractors' outputs is not possible.
 %
-Accordingly, in the following Section we provide a more detailed discussion about the readability assessment, highlighting the most challenging difficulties clustered on the basis of the knowledge representation chosen by extraction algorithms.
+Accordingly, in this paper we provide a detailed discussion about the readability assessment, highlighting the most challenging issues. The discussion is clustered on the basis of the knowledge representation of the extraction algorithms.
 
 \section{Evaluating Extracted Knowledge}
 
-The knowledge extracted via SKE techniques can be evaluated through different interesting indicators, for instance:
+Some of the indicators that can be exploited to evaluate the knowledge extracted via SKE techniques are:
 %
 \begin{inlinelist}
-	\item the predictive performance of the knowledge rules w.r.t.\ the data or the BB predictions (this latter is called \emph{fidelity});
-	\item the readability extent from a human perspective; and
+	\item the predictive performance of the knowledge rules w.r.t.\ the data or the BB predictions (the latter is called \emph{fidelity});
+	\item the readability level from a human perspective; and
 	\item the input space coverage.
 \end{inlinelist}
 
-It is easy to assess the knowledge predictive performance with the same scoring function adopted to evaluate the underlying BB.
+It is quite easy to evaluate the knowledge predictive performance with the same scoring function adopted to evaluate the underlying BB.
 %
 Adequate scoring metrics are, for instance, the accuracy and F$_1$ scores for classification tasks and the mean absolute/squared error and R$^2$ score for regression tasks.
 %
-Of course this indicator is relevant, since it represents the ultimate way to assess if the knowledge is suitable to draw predictions.
+This indicator is pretty relevant since it represents the best way to assess if the knowledge is suitable to draw predictions.
 
-The input space coverage can be also measured in a trivial way, e.g., by observing how many data set instances are covered by the extracted rules, or by performing some kind of equal-spaced or random sampling inside the input space and checking how many data points are covered.
+The input space coverage can also be measured in a trivial way, e.g., by observing how many data set instances are covered by the extracted rules, or by performing some kind of equal-spaced or random sampling inside the input space and then checking how many data points are covered.
 %
-Obviously, the latter solution is more demanding for high-dimensional data sets and may have little significance in case the data set is sparse and thus characterised by empty regions.
+Obviously, the latter solution is more demanding for high-dimensional data sets and may have little significance in the case of sparse data sets (characterised by empty regions).
 %
-This indicator is important because a knowledge that is extremely human readable (e.g., composed of a single, simple rule) and having great predictive performance (e.g., 100\% accuracy) is actually useless if it covers an infinitesimally small region of the input feature space.
+This indicator is also important because extremely human readable knowledge (e.g., composed of a single, simple rule) having excellent predictive performance (e.g., 100\% accuracy) is actually useless if it covers an infinitesimally small region of the input feature space.
 
-A different and more articulated reasoning is required about human-readability assessment.
+Human-readability assessment and evaluation could turn out not to be so trivial.
 %
-Is is possible to distinguish between 2 different levels of readability, both related to the presentation of the extracted knowledge to users.
+First of all, we have to distinguish between two different levels of readability, both related to the presentation of the extracted knowledge to users.
 %
-We could consider a \emph{macrolevel} about the knowledge shape and dimension -- for instance if it is represented as a tree, a list, a table, etc. -- and how many leaves, rules, rows/columns, etc., are present, respectively.
+On the one hand, we can consider the \emph{macrolevel} of readability, related to the knowledge shape and dimension -- e.g., if it is represented as a tree, a list, a table, etc. -- and to the number of leaves, rules, rows/columns present (aka complexity).
 %
-We then may consider a \emph{microlevel} to recursively take into account the same indicators (shape and complexity intended as number of elements) for each element composing the knowledge.
+On the other hand, we can focus on the \emph{microlevel} of readability,  to recursively take into account the same indicators -- shape and complexity -- for each element in the knowledge.
 %
-Examples may be the kind of preconditions of each element (e.g., oblique rules, \mofn{} tree nodes) and how many variables, constants and predicates appear inside them.
+As an example of the microlevel consider for instance the kind of preconditions of each element (e.g., oblique rules, \mofn{} tree nodes) and how many variables, constants and predicates appear inside them.
 %
-This is far from being a trivial task, since equivalent concepts may be represented according to different notations, each one having its own conciseness and expressiveness.
+As can be noticed, this is far from being a trivial task, since equivalent concepts may be represented according to different notations, each one having its own conciseness and expressiveness.
 %
-In the following both macrolevel and microlevel are examined in details, showing that the most challenging issues are related to the latter.
+In the following both macrolevel and microlevel are examined in detail, showing that the most challenging issues are related to the latter.
 
-\subsection{Macrolevel}\label{ssec:macro}
+\subsection{Macrolevel: shape and complexity}\label{ssec:macro}
 
 The most common knowledge representations, when it has to be presented to human users, are decision lists~\cite{freitas2014comprehensible,huysmans2011empirical}, trees~\cite{quinlan1993c4,breiman1984classification} and tables~\cite{sethi2012kdruleex}.
 %
-The reason behind their massive exploitation is related to their high understandability for humans.
+The reason behind their massive exploitation is related to their high level of understandability for humans.
 
 \paragraph{Decision lists}
 
 Knowledge having this shape is represented as a list of rules, where each rule has a precondition and a postcondition.
 %
-Preconditions usually are conjunctions (or less frequently disjunctions) of constraints on the input variables.
+Preconditions usually are conjunctions -- or less frequently disjunctions -- of constraints on the input variables.
 %
 Postconditions, on the other hand, are the associated outputs.
 %
 Thus, a rule provides output predictions for all and only those input instances satisfying the rule precondition.
 %
-The complexity of the list may be easily assessed through the amount of contained rules.
+The complexity of the list may be easily assessed through the number of contained rules.
 
-Lists may be exhaustive, if it is always possible to draw predictions for input instances (i.e., at least one rule can be applied to each input instance), or not.
+Lists may be exhaustive if it is always possible to draw predictions for input instances (i.e., at least one rule can be applied to each input instance), or not.
 %
 This characteristic does not affect the knowledge readability, but only the input space coverage.
 
-Furthermore, rules may be overlapping, if more than one rule may be applied at the same time to a single input instance, or not (if at most one rule can be applied).
+Furthermore, rules may overlap -- if more than one rule may be applied simultaneously to a single input instance -- or not---if at most one rule can be used.
 %
-This feature may affect the overall readability, but actually it can be neglected since knowledge extracted via SKE techniques usually relies on non-overlapping rules, or the overlapping rules have some degree of confidence thanks to which it is possible to select a single rule for each input sample.
+This feature may affect the overall readability, however, in practice, it can be neglected since knowledge extracted via SKE techniques usually relies on non-overlapping rules, or the overlapping rules have some degree of confidence thanks to which it is possible to select a single rule for each input sample.
 
-Rule lists may be hierarchical, if some rules have as postcondition a sublist of rules.
+Rule lists may be hierarchical if some rules have as postcondition a sublist of rules.
 %
 They can be trivially converted into a non-hierarchical list, so there is no need to consider this specific scenario.
 
 Finally, rule lists may be ordered -- when rule number $n$ is evaluated only if preconditions of rules $1 \dots n-1$ are not satisfied -- or unordered---if, otherwise, any rule can be chosen without taking into account the preceding in the list.
 %
-Human readability is strongly impacted by the list ordering, since human users must be conscious that a rule can be selected only if all the preceding have been already tested.
+Human readability is strongly impacted by the list ordering since human users must be conscious that a rule can be selected only if all the preceding have been already tested.
 %
 In other words, rules number $n$ implicitly carries along information about the preconditions of other distinct $n-1$ rules, i.e., implicit information that is inherently coded within the ordering.
 %
 To give an example, the fourth rule in an unordered set may be something like ``output is $post_4$ if $pre_4$'', and humans are able to read and apply the rule as is.
 %
-We remark that $pre_i$ and $post_i$ are the precondition and postcondition, respectively, associated to the $i$-th rule of the list.
+We remark that $pre_i$ and $post_i$ are the precondition and postcondition, respectively, associated with the $i$-th rule of the list.
 %
 The same rule in an ordered set should be considered by humans as ``output is $post_4$ if $pre_4, not(pre_3), not(pre_2), not(pre_1)$'', where $not(pre)$ is true if $pre$ is not satisfied and the comma operator represents logical conjunction.
 %
-Of course the readability of ordered sets is hindered by this consideration, especially for a large amount of rules.
+Of course the readability of ordered sets is hindered by this consideration, especially for a large number of rules.
 
 \paragraph{Decision trees}
 
 Knowledge adhering to this representation differs from rule lists since in this case rules are represented as complete paths from the tree root to the leaves.
 %
-Each distinct path from root to a different leaf is a rule, so the complexity of the knowledge is equal to the number of leaves (that in turn is equal to the number of rules).
+Each distinct path from the root to a different leaf is a rule, so the complexity of the knowledge is equal to the number of leaves (that in turn is equal to the number of rules).
 %
 Decision trees are usually binary trees storing a constraint on one or more input variables in each internal node and a decision in each leaf.
 %
@@ -265,7 +267,7 @@ As a consequence, the precondition of a rule is given by the logical conjunction
 %
 Conversely, the postcondition is associated with the leaf.
 
-Decision trees are always exhaustive by design, since it is always possible to draw predictions for the given instances.
+Decision trees are always exhaustive by design since it is always possible to draw predictions for the given instances.
 %
 The provided rules are also non-overlapping, because only one leaf may be reached when examining an input sample.
 
@@ -275,7 +277,7 @@ We believe that the best option to analyse decision tree human readability is to
 
 Knowledge following this representation is provided in tabular form.
 %
-Usually each column (or row) represents a variable and each row (or column) is associated to a rule.
+Usually, each column (or row) represents a variable and each row (or column) is associated with a rule.
 %
 In the following we associate columns with variables and rows with rules.
 %
@@ -283,13 +285,13 @@ The cell obtained by intersecting column $j$ with row $k$ represents the constra
 %
 If variable $j$ is the output variable, then the cell contains the output decision of the rule.
 %
-Usually the output column is the last.
+Usually, the output column is the last.
 
-By assuming this notation, it is straightforward to obtain rules having as precondition the conjunction of all the constraints on a same row and as postcondition the contents of the last row cell.
+By assuming this notation, it is straightforward to obtain rules having as precondition the conjunction of all the constraints on the same row and as postcondition the contents of the last row cell.
 %
 It is as well trivial to obtain the complexity of the table in terms of number of rows (equal to the rule amount).
 
-In order to enable a fair comparison between decision tables and other kind of knowledge shape, the former may be easily converted into (generally unordered) rule lists.
+In order to enable a fair comparison between decision tables and other kinds of knowledge shapes, the former may be easily converted into (generally unordered) rule lists.
 
 \paragraph{Macrolevel observations}
 
