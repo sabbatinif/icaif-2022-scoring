@@ -201,7 +201,7 @@ Human-readability assessment and evaluation could turn out not to be so trivial.
 %
 First of all, we have to distinguish between two different levels of readability, both related to the presentation of the extracted knowledge to users.
 %
-On the one hand, we can consider the \emph{macrolevel} of readability, related to the knowledge shape and dimension -- e.g., if it is represented as a tree, a list, a table, etc. -- and to the number of leaves, rules, rows/columns present (aka complexity).
+On the one hand, we can consider the \emph{macrolevel} of readability of the knowledge as a whole, related to the knowledge shape and dimension -- e.g., if it is represented as a tree, a list, a table, etc. -- and to the number of leaves, rules, rows/columns present (aka complexity).
 %
 On the other hand, we can focus on the \emph{microlevel} of readability,  to recursively take into account the same indicators -- shape and complexity -- for each element in the knowledge.
 %
@@ -211,7 +211,7 @@ As can be noticed, this is far from being a trivial task, since equivalent conce
 %
 In the following both macrolevel and microlevel are examined in detail, showing that the most challenging issues are related to the latter.
 
-\subsection{Macrolevel: shape and complexity}\label{ssec:macro}
+\subsection{Macrolevel: knowledge as a whole}\label{ssec:macro}
 
 The most common knowledge representations, when it has to be presented to human users, are decision lists~\cite{freitas2014comprehensible,huysmans2011empirical}, trees~\cite{quinlan1993c4,breiman1984classification} and tables~\cite{sethi2012kdruleex}.
 %
@@ -303,7 +303,7 @@ In this way it is possible to perform a fair comparison amongst different knowle
 %
 During a macrolevel readability assessment, a knowledge having smaller complexity (i.e., fewer rules) should be preferred over other solutions.
 
-\subsection{Microlevel}
+\subsection{Microlevel: rules}
 
 When extracting knowledge, SKE techniques output rules adhering to different representations.
 %
@@ -319,7 +319,7 @@ The basic notations for equalities and inequalities are $X = u$, $Y \neq v$; $Z 
 %
 Basic literals may be extended to interval and set inclusion/exclusion, to group together a disjunction of a set of literals.
 
-This first step to achieve better conciseness comes along with a major readability issue.
+This first step to achieving better conciseness comes along with a major readability issue.
 %
 Indeed, a knowledge may contain two rules having the same output and only one precondition each, composed of a basic literal involving the same variable but compared to different constants, for instance ``output is $A$ if $color=blue$'' and ``output is $A$ if $color=red$''.
 %
@@ -347,19 +347,19 @@ Furthermore, one may observe that the more a rule adopts concise literals, the m
 
 \paragraph{\mofn{} rules}
 
-Literals may be expressed as groups, where the group is satisfied if at least one amongst the possible constraints is satisfied, as shown in the previous paragraph.
+Literals may be expressed as groups, where the group is satisfied if at least one of the possible constraints is satisfied, as shown in the previous paragraph.
 %
 This definition may be further relaxed, and a group of $N$ literals can be considered as satisfied if at least $M$ constraints are satisfied.
 %
 \mofn{} rules are exactly defined in this manner.
 %
-They enable a much higher degree of conciseness, however our opinion is that human users encounter more difficulties in understanding the rule.
+They enable a much higher degree of conciseness, however, our opinion is that human users encounter more difficulties in understanding the rule.
 %
 As an example, one may think about a 4-of-9 rule.
 
 Large $N$ values also obfuscate the real impact of individual variables on the final prediction.
 %
-Furthermore, it is quite challenging the mapping of \mofn{} rules to readability scores, since their readability decreases w.r.t.\ both $M$ and $N$.
+Furthermore, it is quite challenging mapping \mofn{} rules to readability scores, since their readability decreases w.r.t.\ both $M$ and $N$.
 %
 For instance, 1-of-5 rules are more easily understandable than 3-of-5 or 1-of-10 rules.
 %
@@ -383,7 +383,7 @@ As a consequence, human users reading a fuzzy rule need to
 	\item read the postcondition and calculate the corresponding confidence.
 \end{inlinelist}
 %
-We believe that it would be far more readable a direct, simple basic notation.
+We believe that it would be far more readable than a direct, simple basic notation.
 %
 Since it is not possible to numerically assess the introduced human-interpretability hindrance, it is also hard to assign a readability score to fuzzy rules.
 
@@ -393,13 +393,13 @@ When dealing with numerical attributes, rule literals may be expressed as inequa
 %
 On the input feature space these rules represent oblique hyperplanes.
 
-Knowledge conciseness benefits from the application of oblique rules, since the exploitation of composite features is enabled, however in our opinion the human readability pays a high price.
+Knowledge conciseness benefits from the application of oblique rules since composite features are enabled, however, in our opinion, human readability pays a high price.
 %
 One may think about the description of a concrete object to be classified.
 %
 Such an object may be represented through weight, volume and position.
 %
-Classification involving input feature separately is easy for humans.
+Classification involving input features separately is easy for humans.
 %
 The same is not true if human users have to consider, for instance, a linear combination of weight and position.
 %
@@ -407,25 +407,27 @@ For this reason, the same final considerations about the fuzzy rule readability 
 
 \paragraph{Microlevel observations}
 
-Even if the macrolevel knowledge complexity is quite easy to be assessed, the same does not hold at microlevel, because of the variety of adopted rule notations.
+While the macrolevel knowledge complexity is quite easy to be assessed, the same does not hold at microlevel, because of the variety of adopted rule notations.
 %
-Different SKE algorithms adopt different notations and each one comes along its proper conciseness and human-interpretability degree.
+Different SKE algorithms adopt different notations and each one comes with its proper conciseness and human-interpretability degree.
 %
 Unfortunately, it is not possible to convert the various formats into a canonical, comparable notation and for this reason the problem of assigning a readability score to individual rules is a major open issue in the assessment of the extracted knowledge quality.
 
 \section{Conclusions}
 
-In this paper we analysed the most common formats and notations used to represent the knowledge extracted via SKE techniques from black-box models in order to highlight suitable metrics to evaluate the knowledge quality.
+In this paper we discuss the possible metrics to evaluate in a quantitative way the \emph{quality} of the symbolic knowledge extracted via SKE techniques out of a BB model as well as the need to define such metrics.
 %
-We showed that quality should encompass predictive performance, input space coverage and knowledge readability.
+We showed that quality evaluation should include an evaluation of \textit{i)} predictive performance, \textit{ii)} input space coverage and \textit{iii)} knowledge readability.
 %
-As for the latter, readability can be observed at a macrolevel -- as shape and complexity of the knowledge itself -- and at a microlevel---as shape and complexity of knowledge rules.
+While for the first two the definition of a metric and the comparison of a score is quite trivial, this does not happen for the last one.
 %
-We showed that at a macrolevel the knowledge may be easily compared.
+As for the latter, readability can be observed at a macrolevel -- as the shape and complexity of the knowledge as a whole -- and at a microlevel---as shape and complexity of each knowledge rules.
+%
+We showed that at a macrolevel the knowledge may be easily compared since it is quite easy to convert one format into another.
 %
 Conversely, we pointed out the most tricky characteristics of microlevel considerations, to favour further studies and discussion on the topic.
 %
-Our goal is to find a suitable metric to assess the knowledge quality in a fair, quantitative and objective manner, without neglecting its readability and our future works will be focused on this area.
+Future works will be devoted to find such a suitable metric to assess the knowledge quality in a fair, quantitative and objective way.
 
 %\begin{figure}[h]
 %  \centering
