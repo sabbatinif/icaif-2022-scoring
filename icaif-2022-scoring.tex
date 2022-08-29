@@ -493,7 +493,7 @@ Different SKE algorithms adopt different notations and each one comes with its p
 %
 Unfortunately, it is not possible to convert the various formats into a canonical, comparable notation and for this reason the problem of assigning a readability score to individual rules is a major open issue in the assessment of the extracted knowledge quality.
 
-\section{Case Study: The Istanbul Stock Exchange Data Set}
+\section{The Istanbul Stock Exchange Data Set Example}
 
 \begin{table*}[t]\centering
 	\caption{Quality assessments for the knowledge extracted by different SKE algorithms from a 9-NN for the Iris data set.}\label{tab:experiments}
@@ -551,13 +551,13 @@ Unfortunately, it is not possible to convert the various formats into a canonica
 	\end{tabular}
 \end{table*}
 
-To highlight the differences amongst the output of different knowledge extractors, we applied the \cart{}, \creepy{}, \gridex{} and \gridrex{} extractors to the Istanbul Stock Exchange data set\footnote{\vurl{https://archive.ics.uci.edu/ml/datasets/ISTANBUL+STOCK+EXCHANGE}}, reported in \Cref{fig:data}.
+To concretly show the differences amongst the output of different knowledge extractors, we applied the \cart{}, \creepy{}, \gridex{} and \gridrex{} extractors to the Istanbul Stock Exchange data set\footnote{\vurl{https://archive.ics.uci.edu/ml/datasets/ISTANBUL+STOCK+EXCHANGE}}, reported in \Cref{fig:data}.
 %
 The data set is composed of 8 continuous features (7 as input + 1 as output).
 %
-We considered all of them during the training phase of black boxes and extractors, however we reported in \Cref{fig:dataPred,fig:experiments} only the most relevant two.
+We considered all of them during the training phase of black boxes and extractors, however, for the sake of readability,  we reported in \Cref{fig:dataPred,fig:experiments} only the most relevant two.
 
-Extractor have been applied to a linear regressor (LR) and a random forest (RF) BB.
+The selected extractors have been applied to a linear regressor (LR) and a random forest (RF) BB.
 %
 Mean absolute error (MAE) and R$^2$ score of the BB predictions are reported in \Cref{tab:experiments}.
 %
@@ -567,25 +567,25 @@ Predictions obtained through the extracted knowledge have been evaluated with th
 %
 The corresponding decision boundaries are shown in Figures \ref{fig:cart6} to \ref{fig:gridrexRF}.
 
-From the plots in \Cref{fig:experiments} it is possible to draw a number of conclusion about the knowledge readability at a macrolevel.
+Considerations about the macrolevel knowledge readability can be drawn by analysing the plots in \Cref{fig:experiments}.
 %
-For instance, it is clearly noticeable that \cart{}, \gridex{} and \creepy{} with constant outputs introduce an undesired discretisation in the output predictions, thus implying a worsening in the overall predictive performance.
+First of all, it is clearly noticeable that \cart{}, \gridex{} and \creepy{} with constant outputs introduce an undesired discretisation in the output predictions, thus implying a worsening in the overall predictive performance.
 %
-Conversely, \gridrex{} and \creepy{} with linear outputs are able to provide linear combinations of the input variables as output predictions, resulting in knowledge having fewer rules with smaller predictive error.
+Conversely, \gridrex{} and \creepy{} with linear outputs are able to provide linear combinations of the input variables as output predictions, resulting in knowledge having fewer rules with smaller predictive errors.
 
 Observing the same plots it is clearly noticeable that \creepy{} outputs a hierarchical knowledge, thus mappable in an ordered list of rules.
 %
-The same holds for \cart{}'s knowledge, if simplified, since it is based on a decision tree.
+The same holds for \cart{}'s knowledge -- if simplified -- since it is based on a decision tree.
 %
-On the other hand, \gridex{} and \gridex{} provides rules associated with hypercubic and non-overlapping regions, so they are not ordered and each one contains the same amount of variable occurrences, predicates (i.e., interval inclusion) and constant values (i.e., 2 per variable).
+Differently, \gridex{} and \gridex{} provide rules associated with hypercubic and non-overlapping regions, so they are not ordered and each one contains the same amount of variable occurrences, predicates (i.e., interval inclusion) and constant values (i.e., 2 per variable).
 
 Macrolevel readability comparisons can be easily performed by observing the `Rules' column in \Cref{tab:experiments}.
 %
-\gridrex{} is the best choice, since it outputs a single rule, followed by the \creepy{} instance without output discretisation.
+\gridrex{} is the best choice since it outputs a single rule, followed by the \creepy{} instance without output discretisation.
 %
-Their superiority is confirmed also from the predictive performance point of view, since they have the highest R$^2$ score measurements.
+Their superiority is confirmed also from the predictive performance point of view since they have the highest R$^2$ score measurements.
 %
-\gridrex{} results non-exhaustive in the input space coverage, since a portion is considered negligible due to the absence of training instances (so there are test instances that cannot be predicted).
+\gridrex{} results are non-exhaustive in the input space coverage since a portion is considered negligible due to the absence of training instances (so there are test instances that cannot be predicted).
 
 To perform microlevel comparisons it is necessary to observe the output knowledge rules provided by the various extractors.
 %
@@ -633,7 +633,7 @@ ise(BOVESPA, DAX, EM, EU, FTSE, NIKKEI, SP, ISE) :-
 ise(BOVESPA, DAX, EM, EU, FTSE, NIKKEI, SP, ISE) :- ISE is 0.01.
 \end{lstlisting}
 
-The two versions of the \cart{}'s knowledge are absolutely equivalent in terms of predictive accuracy and input space coverage, since they provide the same predictions.
+On one hand, the two versions of the \cart{}'s knowledge are totally equivalent in terms of predictive accuracy and input space coverage, i.e., they provide the same predictions.
 %
 However, the first has redundant literals, whereas the second has implicit constraints.
 %
@@ -641,9 +641,9 @@ This means that, when measuring the knowledge microlevel readability, the first 
 %
 For instance, the conjunction \verb|EU > -0.00, EU > 0.01, EM =< 0.01| hinders readability if compared to the equivalent \verb|EU > 0.01, EM =< 0.01|.
 %
-\emph{Vice versa}, in the simplified version the same rule represented as \verb|EM =< 0.01| implies to implicitly acknowledge as false the constraint \verb|EU =< 0.01|, and to do this humans need to check all the previous rules.
+\emph{Vice versa}, in the simplified version the same rule represented as \verb|EM =< 0.01| implies implicitly acknowledging as false the constraint \verb|EU =< 0.01|, and to do this humans need to check all the previous rules.
 %
-An ideal microlevel readability metrics should be able to assign a good score to \verb|EU > 0.01, EM =< 0.01| as well as to penalise the redundant and implicit alternatives.
+An ideal microlevel readability metric should be able to assign a good score to \verb|EU > 0.01, EM =< 0.01| as well as penalise the redundant and implicit alternatives.
 
 On the other hand, by comparing \cart{}'s and \creepy{}'s extracted knowledge it is clear that they exhibit
 %
@@ -654,7 +654,9 @@ On the other hand, by comparing \cart{}'s and \creepy{}'s extracted knowledge it
 	\item different microlevel readability, since \creepy{}'s predictions may be constants as well as linear combinations of up to 7 variables.
 \end{inlinelist} 
 %
-The lacking of a quantitative metric to evaluate the microlevel readability, and thus the overall knowledge readability, makes it impracticable to automatically decide whether longer rule lists with simple outputs are preferable or not over shorter lists with more complex outputs.
+An ideal microlevel readability metric should be able to assign a score taking into account these differences.
+%
+The lack of a quantitative metric to evaluate the microlevel readability -- and thus the overall knowledge readability -- makes it impracticable to automatically decide whether longer rule lists with simple outputs are preferable or not over shorter lists with more complex outputs.
 
 \section{Conclusions}
 
