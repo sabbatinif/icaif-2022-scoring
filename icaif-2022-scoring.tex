@@ -89,7 +89,7 @@
   %
   Finding such a metric would be the key, for instance, to enable automatic comparison between a set of different knowledge representations, paving the way for the development of parameter autotuning algorithms for knowledge extractors.
   %
-  In this paper we discuss in detail the criticalities of readability assessment and evaluation, taking into account the most common knowledge representations while highlighting the most puzzling issues.
+  In this paper we discuss the need of such a metric as well as the criticalities of readability assessment and evaluation, taking into account the most common knowledge representations while highlighting the most puzzling issues.
 \end{abstract}
 
 %%
@@ -120,23 +120,41 @@
 
 \maketitle
 
-\section{Introduction and Background}
+\section{Introduction}
 
-The ubiquitous presence of sub-symbolic machine learning predictors in the large majority of decision systems~\cite{rocha2012far} offers advantages as well as drawbacks.
+AI for finance is a reality including but not limited to consumer credit, credit risk, and anti-money laundering applications \cite{aziz2019machine}. 
 %
-The former include the accurate predictive capabilities of sub-symbolic predictors.
+Generally, techniques of machine learning exploited -- in order to obtain high predictive capabilities -- are the so-called sub-symbolic techniques, that offers advantages as well as drawbacks~\cite{rocha2012far}.
 %
-However, predictive performances of models are usually proportional to their internal complexity, intended as amount of parameters to be trained and/or knowledge representation structure.
-%
-For instance, knowledge in deep neural networks is represented as a huge number of neuron weights and biases---too many to enable human inspection.
-%
-From here the most severe disadvantage of sub-symbolic models: the lack of human interpretability.
+The main drawback lies in the opacity of these models, which are therefore obscure in the decisions they make and lack of human interpretability.
 %
 For such a reason models of this kind are also called \email{black boxes} (BB).
-%
-When dealing with critical applications -- i.e., in medical or financial areas -- lack of human awareness is even more unacceptable and makes BB models impracticable.
 
-Different strategies are present in the literature to overcome this issue~\cite{guidotti2018survey}:
+When dealing with critical applications -- such as the finance ones -- lack of human awareness is even more unacceptable and makes BB models impracticable. 
+%
+Finance is a domain with unique ethical, legal, and regulatory challenges as decisions can have immediate impact on life of people \cite{weiss2021business}. 
+%
+It is still unclear how to implement and regulate trustworthy AI systems in practice. Following the definition of the High-Level Expert Group on AI \cite{egtai} trustworthy AI should satisfy three main pillars: comply with all applicable laws and regulations (\emph{lawfulness}), adhere to ethical principles and values (\emph{ethicality}), and be safe, secure and reliable (\emph{robustness}). It is difficult to ensure that these conditions hold as there are no proven methods to translate these conditions into practice \cite{mittelstadt2019principles}.
+%
+A possible step towards trustworthy AI is to develop explainable AI (XAI). XAI aims to create insight into how and why AI models produce predictions, while maintaining high predictive performance levels
+%
+For trustworthy AI, XAI became so also a requirement and not only a desiderata.
+
+%The ubiquitous presence of sub-symbolic machine learning predictors in the large majority of decision systems~\cite{rocha2012far} offers advantages as well as drawbacks.
+%
+%The former include the accurate predictive capabilities of sub-symbolic predictors.
+%
+%However, predictive performances of models are usually proportional to their internal complexity, intended as amount of parameters to be trained and/or knowledge representation structure.
+%
+%For instance, knowledge in deep neural networks is represented as a huge number of neuron weights and biases---too many to enable human inspection.
+%
+%From here the most severe disadvantage of sub-symbolic models: the lack of human interpretability.
+%
+%For such a reason models of this kind are also called \email{black boxes} (BB).
+%
+%When dealing with critical applications lack of human awareness is even more unacceptable and makes BB models impracticable.
+
+Different strategies are present in the literature to tackle XAI via explainable models~\cite{guidotti2018survey}:
 %
 \begin{inlinelist}
 	\item rely on human-interpretable models, as shallow decision trees~\cite{Rudin2019}; or
@@ -146,24 +164,26 @@ Different strategies are present in the literature to overcome this issue~\cite{
 While \textit{i)} is not always applicable, \textit{ii)} is gaining a momentum. The amount of SKE algorithms available in the literature is constantly increasing, also thanks to the software support provided by object-oriented frameworks for machine learning 
 %(e.g., Scikit-learn\footnote{\vurl{https://scikit-learn.org/stable}}~\cite{PedregosaVGMTGBPWDVPCBPD11} for Python or Smile\footnote{\vurl{https://haifengl.github.io}} for the Java Virtual Machine) 
 as well as to the developing of dedicated frameworks (e.g., \psyke{}~\cite{psyke-woa2021,psyke-ia2022,psyke-extraamas2022}).
-
-SKE procedures belong to two different paradigms~\cite{andrews1995survey}: \textit{i)} they can be \emph{decompositional} -- if they inspect the internal structure of the BB -- \textit{i)} or \emph{pedagogical}---if they only observe the BB response to given inputs.
 %
-Since in decompositional methods type and structure of the BB play a fundamental role, they are usually not general-purpose and designed for specific models, for instance only neural networks with a fixed amount of hidden layers, as in the case of \textsc{ReFANN}~\cite{setiono2002extraction}.
+%SKE procedures belong to two different paradigms~\cite{andrews1995survey}: \textit{i)} they can be \emph{decompositional} -- if they inspect the internal structure of the BB -- \textit{i)} or \emph{pedagogical}---if they only observe the BB response to given inputs.
+%%
+%Since in decompositional methods type and structure of the BB play a fundamental role, they are usually not general-purpose and designed for specific models, for instance only neural networks with a fixed amount of hidden layers, as in the case of \textsc{ReFANN}~\cite{setiono2002extraction}.
+%%
+%Conversely, pedagogical approaches are suitable for any BB predictor.
+%%
+%When SKE techniques mix elements of the two categories it is possible to define \emph{eclectic} approaches, which however may be considered decompositional, as they require some sort of internal inspection.
 %
-Conversely, pedagogical approaches are suitable for any BB predictor.
-%
-When SKE techniques mix elements of the two categories it is possible to define \emph{eclectic} approaches, which however may be considered decompositional, as they require some sort of internal inspection.
-
 Amongst the application areas of SKE there are financial~\cite{baesens2001building,baesens2003using,steiner2006using} and medical fields~\cite{bologna1997three,franco2007early,hayashi2000comparison}, but not only~\cite{setiono2011rule,sabbatini22LPFSKE,azcarraga2012keyword,hofmann2003rule}.
 %
 Examples of extractors generally achieving good results are \cart{}~\cite{breiman1984classification}, \trepan{}~\cite{craven1996extracting}, \gridex{}~\cite{gridex-extraamas2021} and \gridrex{}~\cite{gridrex-kr2022}.
 %
 Of course a number of alternatives are present in the literature~\cite{craven1994using,huysmans2006iter,barakat2005eclectic,martens2007comprehensible}, depending on the task at hand.
-%
-A common trait of every extractor is the output, which has to be some sort of human-interpretable knowledge.
+
+A common trait of every SKE extractor is the output, which has to be some sort of human-interpretable knowledge.
 %
 The knowledge usually follows a list or tree representation, where each item (leaf) of the list (tree) corresponds to a specific rule having predictive power.
+%
+However, how to select the best SKE extractor for the case at hand -- possibly as an automatic task -- is still an open issue and the level of human-readability of the extracted knowledge should be evaluated via a fair metric.
 %
 The level of human-readability of the extracted knowledge is bounded to the number of rules it contains and, recursively, to the readability of each rule, in turn.
 %
