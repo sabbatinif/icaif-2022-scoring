@@ -81,7 +81,7 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  As opaque decision systems are being increasingly exploited in almost any application field, issues about their lack of transparency and human readability are a concrete source of concern for end-users.
+  As opaque decision systems are being increasingly adopted in almost any application field, issues about their lack of transparency and human readability are a concrete source of concern for end-users.
   %
   Amongst existing proposals to associate human-interpretable knowledge with accurate predictions provided by opaque models, there are rule extraction techniques, capable of extracting symbolic knowledge out of an opaque model.
   %
@@ -116,23 +116,23 @@
 %%
 %% Keywords. The author(s) should pick words that accurately describe
 %% the work being presented. Separate the keywords with commas.
-\keywords{explainable artificial intelligence, symbolic knowledge extraction, readability metrics}
+\keywords{explainable artificial intelligence, symbolic knowledge extraction, readability metrics, autoML}
 
 \maketitle
 
 \section{Introduction}
 
-Artificial Intelligence (AI) for finance is a reality including but not limited to consumer credit, credit risk, and anti-money laundering applications \cite{aziz2019machine}. 
+Artificial Intelligence (AI) for finance is a reality including, but not limited to, consumer credit, credit risk, and anti-money laundering applications \cite{aziz2019machine}. 
 %
-Generally, techniques of machine learning exploited -- in order to obtain high predictive capabilities -- are the so-called sub-symbolic techniques, that offers advantages as well as drawbacks~\cite{rocha2012far}.
+Generally, techniques of machine learning exploited -- in order to obtain high predictive capabilities -- are the so-called sub-symbolic techniques, that offer advantages as well as drawbacks~\cite{rocha2012far}.
 %
 The main drawback lies in the opacity of these models, which are therefore obscure in the decisions they make and lack of human interpretability.
 %
-For such a reason models of this kind are also called \email{black boxes} (BB).
+For such a reason models of this kind are also called \emph{black boxes} (BB).
 
 When dealing with critical applications -- such as the finance ones -- lack of human awareness is even more unacceptable and makes BB models impracticable. 
 %
-Finance is a domain with unique ethical, legal, and regulatory challenges as decisions can have immediate impact on life of people \cite{weiss2021business}. 
+Finance is a domain with unique ethical, legal, and regulatory challenges as decisions can have immediate impact on people's lives \cite{weiss2021business}. 
 %
 It is still unclear how to implement and regulate trustworthy AI systems in practice. Following the definition of the High-Level Expert Group on AI \cite{egtai} trustworthy AI should satisfy three main pillars: comply with all applicable laws and regulations (\emph{lawfulness}), adhere to ethical principles and values (\emph{ethicality}), and be safe, secure and reliable (\emph{robustness}). It is difficult to ensure that these conditions hold as there are no proven methods to translate these conditions into practice \cite{mittelstadt2019principles}.
 %
@@ -157,7 +157,7 @@ For trustworthy AI, XAI became so also a requirement and not only a \emph{deside
 Different strategies are present in the literature to tackle XAI via explainable models~\cite{guidotti2018survey}:
 %
 \begin{inlinelist}
-	\item rely on human-interpretable models, as shallow decision trees~\cite{Rudin2019}; or
+	\item rely on human-interpretable models, such as shallow decision trees~\cite{Rudin2019}; or
 	\item apply symbolic knowledge extraction (SKE) techniques to the BB~\cite{KENNY2021103459}.
 \end{inlinelist}
 %
@@ -173,7 +173,7 @@ as well as to the developing of dedicated frameworks (e.g., \psyke{}~\cite{psyke
 %%
 %When SKE techniques mix elements of the two categories it is possible to define \emph{eclectic} approaches, which however may be considered decompositional, as they require some sort of internal inspection.
 %
-Amongst the application areas of SKE there are financial~\cite{baesens2001building,baesens2003using,steiner2006using} and medical fields~\cite{bologna1997three,franco2007early,hayashi2000comparison}, but not only~\cite{setiono2011rule,sabbatini22LPFSKE,azcarraga2012keyword,hofmann2003rule}.
+Amongst the application areas of SKE there are financial~\cite{baesens2001building,baesens2003using,steiner2006using} and medical fields~\cite{bologna1997three,franco2007early,hayashi2000comparison} and others~\cite{setiono2011rule,sabbatini22LPFSKE,azcarraga2012keyword,hofmann2003rule}.
 %
 Examples of extractors generally achieving good results are \cart{}~\cite{breiman1984classification}, \trepan{}~\cite{craven1996extracting}, \gridex{}~\cite{gridex-extraamas2021} and \gridrex{}~\cite{gridrex-kr2022}.
 %
@@ -317,7 +317,7 @@ In order to enable a fair comparison between decision tables and other kinds of 
 
 \subsubsection{Macrolevel observations}
 
-\Cref{ssec:macro} may be resumed in few considerations: decision lists, trees and tables are easily comparable in terms of human readability, since even if they provide knowledge according to different formats, it is always possible to obtain an equivalent unordered list without predictive losses.
+\Cref{ssec:macro} may be summarised in few considerations: decision lists, trees and tables are easily comparable in terms of human readability, since even if they provide knowledge according to different formats, it is always possible to obtain an equivalent unordered list without predictive losses.
 %
 The equivalent list will have different individual rules -- e.g., more complex than those in the original knowledge -- but the knowledge macrolevel complexity will not be affected---e.g., the rule amount has to remain the same.
 %
@@ -335,7 +335,7 @@ During a macrolevel readability assessment, a knowledge having smaller complexit
 	\subfloat[Random forest (RF).]{
 		\includegraphics[width=\threeinarow]{figures/RF/model.pdf}\label{fig:rf}
 	}
-	\caption{Data set used in the experiments and corresponding decision boundaries obtained by training a linear regressor and a random forest. Only the two most relevant input features are reported.}\label{fig:dataPred}
+	\caption{Data set used in the experiments and corresponding decision boundaries obtained by training a linear regressor and a random forest. Only the two most relevant input features are reported---i.e., the MSCI European index (EU) and the stock market return index of UK (FTSE).}\label{fig:dataPred}
 \end{figure*}
 
 \begin{figure*}[p]\centering
@@ -497,7 +497,7 @@ However, it is not the preferable solution when dealing with regression data set
 
 \paragraph{Non-constant postconditions}
 
-As for preconditions, also for postconditions there is the possibility to chose more expressive representations, at the expense of human-readability.
+As for preconditions, also for postconditions there is the possibility to choose more expressive representations, at the expense of human-readability.
 %
 Indeed, constant predictions can be substituted with linear combinations or other kinds of functions involving (a subset of) the input features.
 %
@@ -516,7 +516,7 @@ Unfortunately, it is not possible to convert the various formats into a canonica
 \section{The Istanbul Stock Exchange Data Set Example}
 
 \begin{table*}[t]\centering
-	\caption{Quality assessments for the knowledge extracted by different SKE algorithms from a 9-NN for the Iris data set.}\label{tab:experiments}
+	\caption{Quality assessments for the knowledge extracted by different SKE algorithms from a linear regressor and a random forest BB for the Istanbul Stock Exchange data set.}\label{tab:experiments}
 	\begin{tabular}{cccccccc}
 		\toprule
 		\multicolumn{3}{c}{Predictor} &\multicolumn{5}{c}{Extractor} \\
@@ -575,7 +575,7 @@ To concretly show the differences amongst the output of different knowledge extr
 %
 The data set is composed of 8 continuous features (7 as input + 1 as output).
 %
-We considered all of them during the training phase of black boxes and extractors, however, for the sake of readability,  we reported in \Cref{fig:dataPred,fig:experiments} only the most relevant two.
+We considered all of them during the training phase of black boxes and extractors, however, for the sake of readability,  we reported in \Cref{fig:dataPred,fig:experiments} only the most relevant two---i.e., the MSCI European index (EU) and the stock market return index of UK (FTSE).
 
 The selected extractors have been applied to a linear regressor (LR) and a random forest (RF) BB.
 %
