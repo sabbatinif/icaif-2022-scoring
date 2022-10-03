@@ -197,13 +197,15 @@ Accordingly, in this paper we provide a detailed discussion about the readabilit
 
 \section{Evaluating Extracted Knowledge}
 
-Some of the indicators that can be exploited to evaluate the knowledge extracted via SKE techniques are:
+The most common indicators to evaluate the knowledge extracted via SKE techniques~\cite{garcez2001symbolic,tran2013knowledge} are:
 %
 \begin{inlinelist}
 	\item the predictive performance of the knowledge rules w.r.t.\ the data or the BB predictions (the latter is called \emph{fidelity});
 	\item the readability level from a human perspective; and
 	\item the input space coverage.
 \end{inlinelist}
+%
+Having good scores according to these 3 dimensions ensures that the extracted knowledge represents well the underlying domain, that it is interpretable for humans and that it may be used as a surrogate model to draw predictions. 
 
 It is quite easy to evaluate the knowledge predictive performance with the same scoring function adopted to evaluate the underlying BB.
 %
@@ -233,7 +235,7 @@ In the following both macrolevel and microlevel are examined in detail, showing 
 
 \subsection{Macrolevel: knowledge as a whole}\label{ssec:macro}
 
-The most common knowledge representations, when it has to be presented to human users, are decision lists~\cite{freitas2014comprehensible,huysmans2011empirical}, trees~\cite{quinlan1993c4,breiman1984classification} and tables~\cite{sethi2012kdruleex}.
+As widely acknowledged~(e.g.,~\cite{guidotti2018survey}), the most common knowledge representations, when such a knowledge has to be presented to human users, are decision lists~\cite{freitas2014comprehensible,huysmans2011empirical}, trees~\cite{quinlan1993c4,breiman1984classification} and tables~\cite{sethi2012kdruleex}.
 %
 The reason behind their massive exploitation is related to their high level of understandability for humans.
 
@@ -493,7 +495,9 @@ For this reason, the same final considerations about the fuzzy rule readability 
 
 The most simple and human-readable postcondition is represented by a constant value, suitable for both classification and regression tasks, since it may be a string label as well as a numerical value.
 %
-However, it is not the preferable solution when dealing with regression data sets which output feature is strongly correlated to input ones, since the introduced undesired discretisation may lead to the creation of many rules having poor predictive performance.
+However, constant values are not always the best solutions when dealing with regression data sets, especially if the output feature is strongly correlated to the input variables.
+%
+The reason is that constant values introduce an undesired discretisation that usually leads to the creation of many rules having poor predictive performance.
 
 \paragraph{Non-constant postconditions}
 
@@ -512,6 +516,30 @@ While the macrolevel knowledge complexity is quite easy to be assessed, the same
 Different SKE algorithms adopt different notations and each one comes with its proper conciseness and human-interpretability degree.
 %
 Unfortunately, it is not possible to convert the various formats into a canonical, comparable notation and for this reason the problem of assigning a readability score to individual rules is a major open issue in the assessment of the extracted knowledge quality.
+
+\subsection{User interaction}
+
+Since a quantitative assessment of the microlevel readability cannot be straightforwardly defined, a preliminary readability score formulation could take into account a user feedback.
+%
+User interactions may drive such a score according to a custom \emph{desideratum} or a set of \emph{desiderata}.
+%
+For instance, propositional and \mofn{} rules may be preferred over fuzzy and oblique rules, and at the same time propositional rules may be preferred over the \mofn{} notation.
+%
+This solution may be achieved by assigning an \emph{ad hoc} weight to each rule category.
+
+The user interaction is also important when balancing different indicators concurring within the same scoring metric.
+%
+As an example, we can consider a scoring function for the knowledge provided by SKE techniques involving the 3 indicators described in Section 2 (predictive performance, readability and coverage).
+%
+We recall that a knowledge has good quality if it has high predictive performance, high readability and high coverage.
+%
+An effective score may be formulated by multiplying 3 distinct, numerical metrics, one per indicator.
+%
+As a result, when performing a comparison, the knowledge having the highest score is the one having the best quality.
+%
+However, in this scenario it is important to correctly weight the different indicators, and in particular to refine the fidelity/readability trade-off (i.e., how to penalise fidelity losses w.r.t.\ readability losses) on the basis of the task at hand and according to the user experience.
+%
+This may be achieved by introducing a human parametrisation acting on the individual indicators, that will be finally merged in a single multiplicative scoring function.
 
 \section{The Istanbul Stock Exchange Data Set Example}
 
@@ -682,7 +710,7 @@ The lack of a quantitative metric to evaluate the microlevel readability -- and 
 
 In this paper we discuss the possible metrics to evaluate in a quantitative way the \emph{quality} of the symbolic knowledge extracted via SKE techniques out of a BB model as well as the need to define such metrics.
 %
-We showed that quality evaluation should include an evaluation of \textit{i)} predictive performance, \textit{ii)} input space coverage and \textit{iii)} knowledge readability.
+We showed that quality evaluation should consider different indicators, namely: \textit{i)} predictive performance, \textit{ii)} input space coverage and \textit{iii)} knowledge readability.
 %
 While for the first two the definition of a metric and the comparison of a score is quite trivial, this does not happen for the last one.
 %
@@ -693,6 +721,8 @@ We showed that at a macrolevel the knowledge may be easily compared since it is 
 Conversely, we pointed out the most tricky characteristics of microlevel considerations, to favour further studies and discussion on the topic.
 %
 Future works will be devoted to find such a suitable metric to assess the knowledge quality in a fair, quantitative and objective way.
+%
+In particular, we plan to formulate a sound scoring function for microlevel comparisons and to study how the user interaction may help the customisation and integration of the 3 aforementioned indicators in a unique and effective metric assessing the quality of a given knowledge.
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
