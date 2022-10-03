@@ -81,15 +81,15 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  As opaque decision systems are being increasingly adopted in almost any application field, issues about their lack of transparency and human readability are a concrete source of concern for end-users.
+  As opaque decision systems are being increasingly adopted in almost any application field, issues about their lack of transparency and human readability are a concrete concern for end-users.
   %
   Amongst existing proposals to associate human-interpretable knowledge with accurate predictions provided by opaque models, there are rule extraction techniques, capable of extracting symbolic knowledge out of an opaque model.
   %
-  However, how to assess quantitatively the level of readability of the extracted knowledge is still an open issue.
+  However, how to assess the level of readability of the extracted knowledge quantitatively is still an open issue.
   %
   Finding such a metric would be the key, for instance, to enable automatic comparison between a set of different knowledge representations, paving the way for the development of parameter autotuning algorithms for knowledge extractors.
   %
-  In this paper we discuss the need of such a metric as well as the criticalities of readability assessment and evaluation, taking into account the most common knowledge representations while highlighting the most puzzling issues.
+  In this paper we discuss the need for such a metric as well as the criticalities of readability assessment and evaluation, taking into account the most common knowledge representations while highlighting the most puzzling issues.
 \end{abstract}
 
 %%
@@ -124,21 +124,21 @@
 
 Artificial Intelligence (AI) for finance is a reality including, but not limited to, consumer credit, credit risk, and anti-money laundering applications \cite{aziz2019machine}. 
 %
-Generally, techniques of machine learning exploited -- in order to obtain high predictive capabilities -- are the so-called sub-symbolic techniques, that offer advantages as well as drawbacks~\cite{rocha2012far}.
+Usually, to obtain high predictive capabilities, machine learning techniques exploited for predictions rely on sub-symbolic techniques, that offer advantages related to performances but some drawbacks~\cite{rocha2012far}.
 %
-The main drawback lies in the opacity of these models, which are therefore obscure in the decisions they make and lack of human interpretability.
+The main drawback lies in the opacity of these models, which are obscure in the decisions they make and lack human interpretability.
 %
 For such a reason models of this kind are also called \emph{black boxes} (BB).
 
 When dealing with critical applications -- such as the finance ones -- lack of human awareness is even more unacceptable and makes BB models impracticable. 
 %
-Finance is a domain with unique ethical, legal, and regulatory challenges as decisions can have immediate impact on people's lives \cite{weiss2021business}. 
+Finance is a domain where trustworthiness must be ensured \cite{ng2015ethical}. Unique ethical, legal, and regulatory challenges arise as decisions can immediately impact people's lives \cite{weiss2021business}. 
 %
-It is still unclear how to implement and regulate trustworthy AI systems in practice. Following the definition of the High-Level Expert Group on AI \cite{egtai} trustworthy AI should satisfy three main pillars: comply with all applicable laws and regulations (\emph{lawfulness}), adhere to ethical principles and values (\emph{ethicality}), and be safe, secure and reliable (\emph{robustness}). It is difficult to ensure that these conditions hold as there are no proven methods to translate these conditions into practice \cite{mittelstadt2019principles}.
+However, it is still unclear how to implement and test trustworthy AI systems in practice. Following the definition of the High-Level Expert Group on AI \cite{egtai} trustworthy AI should satisfy three main pillars: comply with all applicable laws and regulations (\emph{lawfulness}), adhere to ethical principles and values (\emph{ethicality}), and be safe, secure and reliable (\emph{robustness}). However, how to translate these principles into practice is still an open question \cite{mittelstadt2019principles}.
 %
-A possible step towards trustworthy AI is to develop explainable AI (XAI). XAI aims to create insight into how and why AI models produce predictions, while maintaining high predictive performance levels
+A possible step towards trustworthy AI is to develop explainable AI (XAI), as explainability is one of the 7 more specific requirements that refine the main pillars \cite{egtai}. XAI aims to create insight into how and why AI models produce predictions while maintaining high predictive performance levels.
 %
-For trustworthy AI, XAI became so also a requirement and not only a \emph{desideratum}.
+%For trustworthy AI, XAI became so also a requirement and not only a \emph{desideratum}.
 
 %The ubiquitous presence of sub-symbolic machine learning predictors in the large majority of decision systems~\cite{rocha2012far} offers advantages as well as drawbacks.
 %
@@ -157,13 +157,11 @@ For trustworthy AI, XAI became so also a requirement and not only a \emph{deside
 Different strategies are present in the literature to tackle XAI via explainable models~\cite{guidotti2018survey}:
 %
 \begin{inlinelist}
-	\item rely on human-interpretable models, such as shallow decision trees~\cite{Rudin2019}; or
-	\item apply symbolic knowledge extraction (SKE) techniques to the BB~\cite{KENNY2021103459}.
+	\item human-interpretable models, such as shallow decision trees~\cite{Rudin2019}; or
+	\item symbolic knowledge extraction (SKE) techniques to the BB~\cite{KENNY2021103459}.
 \end{inlinelist}
 %
-While \textit{i)} is not always applicable, \textit{ii)} is gaining a momentum. The amount of SKE algorithms available in the literature is constantly increasing, also thanks to the software support provided by object-oriented frameworks for machine learning 
-%(e.g., Scikit-learn\footnote{\vurl{https://scikit-learn.org/stable}}~\cite{PedregosaVGMTGBPWDVPCBPD11} for Python or Smile\footnote{\vurl{https://haifengl.github.io}} for the Java Virtual Machine) 
-as well as to the developing of dedicated frameworks (e.g., \psyke{}~\cite{psyke-woa2021,psyke-ia2022,psyke-extraamas2022}).
+While \textit{i)} is not always applicable, \textit{ii)} is gaining a momentum. The amount of SKE algorithms available in the literature is constantly increasing, also thanks to the software support provided by object-oriented frameworks for machine learning as well as to the development of dedicated frameworks (e.g., \psyke{}~\cite{psyke-woa2021,psyke-ia2022,psyke-extraamas2022}).
 %
 %SKE procedures belong to two different paradigms~\cite{andrews1995survey}: \textit{i)} they can be \emph{decompositional} -- if they inspect the internal structure of the BB -- \textit{i)} or \emph{pedagogical}---if they only observe the BB response to given inputs.
 %%
@@ -183,7 +181,7 @@ A common trait of every SKE extractor is the output, which has to be some sort o
 %
 The knowledge usually follows a list or tree representation, where each item (leaf) of the list (tree) corresponds to a specific rule having predictive power.
 %
-However, how to select the best SKE extractor for the case at hand -- possibly as an automatic task -- is still an open issue and the level of human-readability of the extracted knowledge should be evaluated via a fair metric.
+However, how to select the best SKE extractor for the case at hand -- possibly as an automatic task -- is still an open issue and the level of human readability of the extracted knowledge should be evaluated via a fair metric.
 %
 The level of human-readability of the extracted knowledge is bounded to the number of rules it contains and, recursively, to the readability of each rule, in turn.
 %
@@ -191,9 +189,9 @@ Indeed, rules may follow several formats with different levels of conciseness ev
 %
 For this reason, the quantitative assessment of knowledge readability -- through an unbiased score and relative metric -- is a quite challenging task.
 %
-The lacking of such a metric prevents the design and implementation of procedures to automatically tune extractor parameters since unbiased comparison of extractors' outputs is not possible.
+The lacking of such a metric prevents the design and implementation of procedures to automatically tune extractor parameters since an unbiased comparison of extractors' outputs is not possible.
 %
-Accordingly, in this paper we provide a detailed discussion about the readability assessment, highlighting the most challenging issues. The discussion is clustered on the basis of the knowledge representation of the extraction algorithms.
+Accordingly, in this paper we provide a detailed discussion about the readability assessment, highlighting the most challenging issues. The discussion is clustered on the basis of the knowledge representation of the extraction algorithm.
 
 \section{Evaluating Extracted Knowledge}
 
@@ -261,7 +259,7 @@ Furthermore, rules may overlap -- if more than one rule may be applied simultane
 %
 This feature may affect the overall readability, however, in practice, it can be neglected since knowledge extracted via SKE techniques usually relies on non-overlapping rules, or the overlapping rules have some degree of confidence thanks to which it is possible to select a single rule for each input sample.
 
-Rule lists may be hierarchical if some rules have as postcondition a sublist of rules.
+Rule lists may be hierarchical if some rules have as a postcondition a sublist of rules.
 %
 They can be trivially converted into a non-hierarchical list, so there is no need to consider this specific scenario.
 
@@ -269,7 +267,7 @@ Finally, rule lists may be ordered -- when rule number $n$ is evaluated only if 
 %
 Human readability is strongly impacted by the list ordering since human users must be conscious that a rule can be selected only if all the preceding have been already tested.
 %
-In other words, rules number $n$ implicitly carries along information about the preconditions of other distinct $n-1$ rules, i.e., implicit information that is inherently coded within the ordering.
+In other words, rules' number $n$ implicitly carries along information about the preconditions of other distinct $n-1$ rules, i.e., implicit information that is inherently coded within the ordering.
 %
 To give an example, the fourth rule in an unordered set may be something like ``output is $post_4$ if $pre_4$'', and humans are able to read and apply the rule as is.
 %
@@ -319,13 +317,13 @@ In order to enable a fair comparison between decision tables and other kinds of 
 
 \subsubsection{Macrolevel observations}
 
-\Cref{ssec:macro} may be summarised in few considerations: decision lists, trees and tables are easily comparable in terms of human readability, since even if they provide knowledge according to different formats, it is always possible to obtain an equivalent unordered list without predictive losses.
+\Cref{ssec:macro} may be summarised in a few considerations: decision lists, trees and tables are easily comparable in terms of human readability, since even if they provide knowledge according to different formats, it is always possible to obtain an equivalent unordered list without predictive losses.
 %
 The equivalent list will have different individual rules -- e.g., more complex than those in the original knowledge -- but the knowledge macrolevel complexity will not be affected---e.g., the rule amount has to remain the same.
 %
 In this way it is possible to perform a fair comparison amongst different knowledge shapes by only focusing on the macrolevel complexity and on further considerations about the microlevel.
 %
-During a macrolevel readability assessment, a knowledge having smaller complexity (i.e., fewer rules) should be preferred over other solutions.
+During a macrolevel readability assessment, knowledge having smaller complexity (i.e., fewer rules) should be preferred over other solutions.
 
 \begin{figure*}[h]\centering
 	\subfloat[Data set.]{
@@ -497,17 +495,17 @@ The most simple and human-readable postcondition is represented by a constant va
 %
 However, constant values are not always the best solutions when dealing with regression data sets, especially if the output feature is strongly correlated to the input variables.
 %
-The reason is that constant values introduce an undesired discretisation that usually leads to the creation of many rules having poor predictive performance.
+The reason is that constant values introduce an undesired discretisation that usually leads to creating many rules with poor predictive performance.
 
 \paragraph{Non-constant postconditions}
 
-As for preconditions, also for postconditions there is the possibility to choose more expressive representations, at the expense of human-readability.
+As for preconditions, also for postconditions there is the possibility to choose more expressive representations, at the expense of human readability.
 %
 Indeed, constant predictions can be substituted with linear combinations or other kinds of functions involving (a subset of) the input features.
 %
-In this case human readability is hindered by the length of the representation (e.g., a linear combination of 2 variables is more immediate than a combination of 5 variables) and its kind (e.g., a linear combination is more comprehensible than a polynomial function).
+In this case, human readability is hindered by the length of the representation (e.g., a linear combination of 2 variables is more immediate than a combination of 5 variables) and its kind (e.g., a linear combination is more comprehensible than a polynomial function).
 %
-The mean to associate these representations with readability scores is still an open issue.
+The means to associate these representations with readability scores is still an open issue.
 
 \subsubsection{Microlevel observations}
 
@@ -519,7 +517,7 @@ Unfortunately, it is not possible to convert the various formats into a canonica
 
 \subsection{User interaction}
 
-Since a quantitative assessment of the microlevel readability cannot be straightforwardly defined, a preliminary readability score formulation could take into account a user feedback.
+Since a quantitative assessment of the microlevel readability cannot be straightforwardly defined, a preliminary readability score formulation could take into account user feedback.
 %
 User interactions may drive such a score according to a custom \emph{desideratum} or a set of \emph{desiderata}.
 %
@@ -531,15 +529,15 @@ The user interaction is also important when balancing different indicators concu
 %
 As an example, we can consider a scoring function for the knowledge provided by SKE techniques involving the 3 indicators described in Section 2 (predictive performance, readability and coverage).
 %
-We recall that a knowledge has good quality if it has high predictive performance, high readability and high coverage.
+We recall that knowledge has good quality if it has high predictive performance, high readability and high coverage.
 %
 An effective score may be formulated by multiplying 3 distinct, numerical metrics, one per indicator.
 %
 As a result, when performing a comparison, the knowledge having the highest score is the one having the best quality.
 %
-However, in this scenario it is important to correctly weight the different indicators, and in particular to refine the fidelity/readability trade-off (i.e., how to penalise fidelity losses w.r.t.\ readability losses) on the basis of the task at hand and according to the user experience.
+However, in this scenario, it is important to correctly weight the different indicators, and in particular to refine the fidelity/readability trade-off (i.e., how to penalise fidelity losses w.r.t.\ readability losses) on the basis of the task at hand and according to the user experience.
 %
-This may be achieved by introducing a human parametrisation acting on the individual indicators, that will be finally merged in a single multiplicative scoring function.
+This may be achieved by introducing a human parametrisation acting on the individual indicators, that will be finally merged into a single multiplicative scoring function.
 
 \section{The Istanbul Stock Exchange Data Set Example}
 
@@ -599,7 +597,7 @@ This may be achieved by introducing a human parametrisation acting on the indivi
 	\end{tabular}
 \end{table*}
 
-To concretly show the differences amongst the output of different knowledge extractors, we applied the \cart{}, \creepy{}, \gridex{} and \gridrex{} extractors to the Istanbul Stock Exchange data set\footnote{\vurl{https://archive.ics.uci.edu/ml/datasets/ISTANBUL+STOCK+EXCHANGE}}, reported in \Cref{fig:data}.
+To show in practice the differences amongst the output of different knowledge extractors, we applied the \cart{}, \creepy{}, \gridex{} and \gridrex{} extractors to the Istanbul Stock Exchange data set\footnote{\vurl{https://archive.ics.uci.edu/ml/datasets/ISTANBUL+STOCK+EXCHANGE}}, reported in \Cref{fig:data}.
 %
 The data set is composed of 8 continuous features (7 as input + 1 as output).
 %
@@ -720,7 +718,7 @@ We showed that at a macrolevel the knowledge may be easily compared since it is 
 %
 Conversely, we pointed out the most tricky characteristics of microlevel considerations, to favour further studies and discussion on the topic.
 %
-Future works will be devoted to find such a suitable metric to assess the knowledge quality in a fair, quantitative and objective way.
+Future works will be devoted to finding such a suitable metric to assess knowledge quality in a fair, quantitative, and objective way.
 %
 In particular, we plan to formulate a sound scoring function for microlevel comparisons and to study how the user interaction may help the customisation and integration of the 3 aforementioned indicators in a unique and effective metric assessing the quality of a given knowledge.
 
