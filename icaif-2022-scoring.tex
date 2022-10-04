@@ -195,12 +195,12 @@ Accordingly, in this paper we provide a detailed discussion about the readabilit
 
 \section{Evaluating Extracted Knowledge}
 
-The most common indicators to evaluate the knowledge extracted via SKE techniques~\cite{garcez2001symbolic,tran2013knowledge} are:
+Following research discussions on the topic~\cite{garcez2001symbolic,tran2013knowledge}, the most common indicators to evaluate the knowledge extracted via SKE techniques are:
 %
 \begin{inlinelist}
 	\item the predictive performance of the knowledge rules w.r.t.\ the data or the BB predictions (the latter is called \emph{fidelity});
 	\item the readability level from a human perspective; and
-	\item the input space coverage.
+	\item the input space coverage (\emph{completeness}).
 \end{inlinelist}
 %
 Having good scores according to these 3 dimensions ensures that the extracted knowledge represents well the underlying domain, that it is interpretable for humans, and that it may be used as a surrogate model to draw predictions. 
@@ -627,11 +627,11 @@ Differently, \gridex{} and \gridex{} provide rules associated with hypercubic an
 
 Macrolevel readability comparisons can be easily performed by observing the `Rules' column in \Cref{tab:experiments}.
 %
-\gridrex{} is the best choice since it outputs a single rule, followed by the \creepy{} instance without output discretisation.
+\gridrex{} is the best choice since it outputs a single rule, followed by the \creepy{}.% instance without output discretisation.
 %
-Their superiority is confirmed also from the predictive performance point of view since they have the highest R$^2$ score measurements.
+Their superiority is confirmed also from the predictive performance point of view since they have the highest R$^2$ score.
 %
-\gridrex{} results are non-exhaustive in the input space coverage since a portion is considered negligible due to the absence of training instances (so there are test instances that cannot be predicted).
+\gridrex{} doesn't meet the completeness requirement, i.e., results are non-exhaustive in the input space coverage since a portion is considered negligible due to the absence of training instances (so there are test instances that cannot be predicted). This should penalise the final metric score.
 
 To perform microlevel comparisons it is necessary to observe the output knowledge rules provided by the various extractors.
 %
@@ -687,7 +687,7 @@ This means that, when measuring the knowledge microlevel readability, the first 
 %
 For instance, the conjunction \verb|EU > -0.00, EU > 0.01, EM =< 0.01| hinders readability if compared to the equivalent \verb|EU > 0.01, EM =< 0.01|.
 %
-\emph{Vice versa}, in the simplified version the same rule represented as \verb|EM =< 0.01| implies implicitly acknowledging as false the constraint \verb|EU =< 0.01|, and to do this humans need to check all the previous rules.
+\emph{Vice versa}, the simplified version of the same rule represented as \verb|EM =< 0.01| implies implicitly acknowledging as false the constraint \verb|EU =< 0.01|, requiring humans to check all the previous rules.
 %
 An ideal microlevel readability metric should be able to assign a good score to \verb|EU > 0.01, EM =< 0.01| as well as penalise the redundant and implicit alternatives.
 
@@ -704,7 +704,7 @@ An ideal microlevel readability metric should be able to assign a score taking i
 %
 The lack of a quantitative metric to evaluate the microlevel readability -- and thus the overall knowledge readability -- makes it impracticable to automatically decide whether longer rule lists with simple outputs are preferable or not over shorter lists with more complex outputs.
 
-\section{Conclusions}
+\section{Conclusions \& discussion}
 
 In this paper, we discuss the possible metrics to evaluate in a quantitative way the \emph{quality} of the symbolic knowledge extracted via SKE techniques out of a BB model as well as the need to define such metrics.
 %
