@@ -142,7 +142,7 @@ A possible step towards trustworthy AI is to develop explainable AI (XAI), as ex
 
 %The ubiquitous presence of sub-symbolic machine learning predictors in the large majority of decision systems~\cite{rocha2012far} offers advantages as well as drawbacks.
 %
-%The former include the accurate predictive capabilities of sub-symbolic predictors.
+%The former includes the accurate predictive capabilities of sub-symbolic predictors.
 %
 %However, predictive performances of models are usually proportional to their internal complexity, intended as amount of parameters to be trained and/or knowledge representation structure.
 %
@@ -181,7 +181,7 @@ A common trait of every SKE extractor is the output, which has to be some sort o
 %
 The knowledge usually follows a list or tree representation, where each item (leaf) of the list (tree) corresponds to a specific rule having predictive power.
 %
-However, how to select the best SKE extractor for the case at hand -- possibly as an automatic task -- is still an open issue and the level of human readability of the extracted knowledge should be evaluated via a fair metric.
+However, how to select the best SKE extractor for the case at hand -- possibly as an automatic task -- is still an open issue and the level of human readability of the extracted knowledge should be evaluated via a fair metric \cite{Sovrano2022,Mulder2021}.
 %
 The level of human-readability of the extracted knowledge is bounded to the number of rules it contains and, recursively, to the readability of each rule, in turn.
 %
@@ -191,7 +191,7 @@ For this reason, the quantitative assessment of knowledge readability -- through
 %
 The lacking of such a metric prevents the design and implementation of procedures to automatically tune extractor parameters since an unbiased comparison of extractors' outputs is not possible.
 %
-Accordingly, in this paper we provide a detailed discussion about the readability assessment, highlighting the most challenging issues. The discussion is clustered on the basis of the knowledge representation of the extraction algorithm.
+Accordingly, in this paper we provide a detailed discussion about the readability assessment, highlighting the most challenging issues. The discussion is clustered based on the knowledge representation of the extraction algorithm.
 
 \section{Evaluating Extracted Knowledge}
 
@@ -203,7 +203,7 @@ The most common indicators to evaluate the knowledge extracted via SKE technique
 	\item the input space coverage.
 \end{inlinelist}
 %
-Having good scores according to these 3 dimensions ensures that the extracted knowledge represents well the underlying domain, that it is interpretable for humans and that it may be used as a surrogate model to draw predictions. 
+Having good scores according to these 3 dimensions ensures that the extracted knowledge represents well the underlying domain, that it is interpretable for humans, and that it may be used as a surrogate model to draw predictions. 
 
 It is quite easy to evaluate the knowledge predictive performance with the same scoring function adopted to evaluate the underlying BB.
 %
@@ -211,11 +211,11 @@ Adequate scoring metrics are, for instance, the accuracy and F$_1$ scores for cl
 %
 This indicator is pretty relevant since it represents the best way to assess if the knowledge is suitable to draw predictions.
 
-The input space coverage can also be measured in a trivial way, e.g., by observing how many data set instances are covered by the extracted rules, or by performing some kind of equal-spaced or random sampling inside the input space and then checking how many data points are covered.
+The input space coverage can also be measured trivially, e.g., by observing how many data set instances are covered by the extracted rules, or by performing some kind of equal-spaced or random sampling inside the input space and then checking how many data points are covered.
 %
-Obviously, the latter solution is more demanding for high-dimensional data sets and may have little significance in the case of sparse data sets (characterised by empty regions).
+The latter solution is more demanding for high-dimensional data sets and may have little significance in the case of sparse data sets (characterised by empty regions).
 %
-This indicator is also important because extremely human readable knowledge (e.g., composed of a single, simple rule) having excellent predictive performance (e.g., 100\% accuracy) is actually useless if it covers an infinitesimally small region of the input feature space.
+This indicator is also important because extremely human readable knowledge (e.g., composed of a single, simple rule) having excellent predictive performance (e.g., 100\% accuracy) is useless if it covers an infinitesimally small region of the input feature space.
 
 Human-readability assessment and evaluation could turn out not to be so trivial.
 %
@@ -225,11 +225,11 @@ On the one hand, we can consider the \emph{macrolevel} of readability of the kno
 %
 On the other hand, we can focus on the \emph{microlevel} of readability, to recursively take into account the same indicators -- shape and complexity -- for each element in the knowledge.
 %
-As an example of the microlevel consider for instance the kind of preconditions of each element (e.g., oblique rules, \mofn{} tree nodes) and how many variables, constants and predicates appear inside them.
+As an example of the microlevel consider for instance the kind of preconditions of each element (e.g., oblique rules, \mofn{} tree nodes) and how many variables, constants, and predicates appear inside them.
 %
-As can be noticed, this is far from being a trivial task, since equivalent concepts may be represented according to different notations, each one having its own conciseness and expressiveness.
+As can be noticed, this is far from being a trivial task, since equivalent concepts may be represented according to different notations, each one having its conciseness and expressiveness.
 %
-In the following both macrolevel and microlevel are examined in detail, showing that the most challenging issues are related to the latter.
+In the following, both macrolevel and microlevel are examined in detail, showing that the most challenging issues are related to the latter.
 
 \subsection{Macrolevel: knowledge as a whole}\label{ssec:macro}
 
@@ -269,13 +269,13 @@ Human readability is strongly impacted by the list ordering since human users mu
 %
 In other words, rules' number $n$ implicitly carries along information about the preconditions of other distinct $n-1$ rules, i.e., implicit information that is inherently coded within the ordering.
 %
-To give an example, the fourth rule in an unordered set may be something like ``output is $post_4$ if $pre_4$'', and humans are able to read and apply the rule as is.
+To give an example, the fourth rule in an unordered set may be something like ``output is $post_4$ if $pre_4$'', and humans can read and apply the rule as is.
 %
 We remark that $pre_i$ and $post_i$ are the precondition and postcondition, respectively, associated with the $i$-th rule of the list.
 %
 The same rule in an ordered set should be considered by humans as ``output is $post_4$ if $pre_4, not(pre_3), not(pre_2), not(pre_1)$'', where $not(pre)$ is true if $pre$ is not satisfied and the comma operator represents logical conjunction.
 %
-Of course the readability of ordered sets is hindered by this consideration, especially for a large number of rules.
+Of course, the readability of ordered sets is hindered by this consideration, especially for a large number of rules.
 
 \paragraph{Decision trees}
 
@@ -301,7 +301,7 @@ Knowledge following this representation is provided in tabular form.
 %
 Usually, each column (or row) represents a variable and each row (or column) is associated with a rule.
 %
-In the following we associate columns with variables and rows with rules.
+In the following, we associate columns with variables and rows with rules.
 %
 The cell obtained by intersecting column $j$ with row $k$ represents the constraint on input variable $j$ in the $k$-th rule.
 %
@@ -313,15 +313,15 @@ By assuming this notation, it is straightforward to obtain rules having as preco
 %
 It is as well trivial to obtain the complexity of the table in terms of number of rows (equal to the rule amount).
 
-In order to enable a fair comparison between decision tables and other kinds of knowledge shapes, the former may be easily converted into (generally unordered) rule lists.
+To enable a fair comparison between decision tables and other kinds of knowledge shapes, the former may be easily converted into (generally unordered) rule lists.
 
 \subsubsection{Macrolevel observations}
 
-\Cref{ssec:macro} may be summarised in a few considerations: decision lists, trees and tables are easily comparable in terms of human readability, since even if they provide knowledge according to different formats, it is always possible to obtain an equivalent unordered list without predictive losses.
+\Cref{ssec:macro} may be summarised in a few considerations: decision lists, trees, and tables are easily comparable in terms of human readability, since even if they provide knowledge according to different formats, it is always possible to obtain an equivalent unordered list without predictive losses.
 %
 The equivalent list will have different individual rules -- e.g., more complex than those in the original knowledge -- but the knowledge macrolevel complexity will not be affected---e.g., the rule amount has to remain the same.
 %
-In this way it is possible to perform a fair comparison amongst different knowledge shapes by only focusing on the macrolevel complexity and on further considerations about the microlevel.
+In this way, it is possible to perform a fair comparison amongst different knowledge shapes by only focusing on the macrolevel complexity and further considerations about the microlevel.
 %
 During a macrolevel readability assessment, knowledge having smaller complexity (i.e., fewer rules) should be preferred over other solutions.
 
@@ -417,15 +417,15 @@ In this case, the first knowledge has 2 rules, 2 variable occurrences and as man
 %
 The second has 1 rule and the same values for other indicators.
 %
-The third knowledge has 1 rule, 1 variable occurrence, 1 predicate and 2 constant values.
+The third knowledge has 1 rule, 1 variable occurrence, 1 predicate, and 2 constant values.
 %
 Obviously, it is preferable to have 1 rule, and this is decided via macrolevel considerations.
 %
-Amongst the second and third knowledge rules there is not a substantial readability difference, since both of them imply the human user to evaluate the $X$ variable and compare it with two constant values.
+Amongst the second and third knowledge rules, there is not a substantial readability difference, since both of them imply the human user to evaluate the $X$ variable and compare it with two constant values.
 %
-As a result, we obtain that a raw counting of variable occurrences, predicates and constants is not suitable to express microlevel readability, even though they are perfect indicators for rule conciseness (in this case the fewer, the better).
+As a result, we obtain that a raw counting of variable occurrences, predicates, and constants is not suitable to express microlevel readability, even though they are perfect indicators for rule conciseness (in this case the fewer, the better).
 %
-Furthermore, one may observe that the more a rule adopts concise literals, the more it is difficult to understand the rule and to associate a readability score to it, as shown in the following.
+Furthermore, one may observe that the more a rule adopts concise literal, the more it is difficult to understand the rule and to associate a readability score to it, as shown in the following.
 
 \paragraph{\mofn{} rules}
 
@@ -473,13 +473,13 @@ Since it is not possible to numerically assess the introduced human-interpretabi
 
 When dealing with numerical attributes, rule literals may be expressed as inequalities involving a linear combination of the input variables and a constant threshold.
 %
-On the input feature space these rules represent oblique hyperplanes.
+On the input feature space, these rules represent oblique hyperplanes.
 
 Knowledge conciseness benefits from the application of oblique rules since composite features are enabled, however, in our opinion, human readability pays a high price.
 %
 One may think about the description of a concrete object to be classified.
 %
-Such an object may be represented through weight, volume and position.
+Such an object may be represented through weight, volume, and position.
 %
 Classification involving input features separately is easy for humans.
 %
@@ -499,21 +499,21 @@ The reason is that constant values introduce an undesired discretisation that us
 
 \paragraph{Non-constant postconditions}
 
-As for preconditions, also for postconditions there is the possibility to choose more expressive representations, at the expense of human readability.
+As for preconditions, also for postconditions, there is the possibility to choose more expressive representations, at the expense of human readability.
 %
 Indeed, constant predictions can be substituted with linear combinations or other kinds of functions involving (a subset of) the input features.
 %
-In this case, human readability is hindered by the length of the representation (e.g., a linear combination of 2 variables is more immediate than a combination of 5 variables) and its kind (e.g., a linear combination is more comprehensible than a polynomial function).
+In this case, human readability is hindered by the length of the representation (e.g., a linear combination of 2 variables is more immediate than a combination of 5 variables) and its type (e.g., a linear combination is more comprehensible than a polynomial function).
 %
 The means to associate these representations with readability scores is still an open issue.
 
 \subsubsection{Microlevel observations}
 
-While the macrolevel knowledge complexity is quite easy to be assessed, the same does not hold at microlevel, because of the variety of adopted rule notations.
+While the macrolevel knowledge complexity is quite easy to be assessed, the same does not hold at the microlevel, because of the variety of adopted rule notations.
 %
 Different SKE algorithms adopt different notations and each one comes with its proper conciseness and human-interpretability degree.
 %
-Unfortunately, it is not possible to convert the various formats into a canonical, comparable notation and for this reason the problem of assigning a readability score to individual rules is a major open issue in the assessment of the extracted knowledge quality.
+Unfortunately, it is not possible to convert the various formats into a canonical, comparable notation and for this reason, the problem of assigning a readability score to individual rules is a major open issue in the assessment of the extracted knowledge quality.
 
 \subsection{User interaction}
 
@@ -527,15 +527,15 @@ This solution may be achieved by assigning an \emph{ad hoc} weight to each rule 
 
 The user interaction is also important when balancing different indicators concurring within the same scoring metric.
 %
-As an example, we can consider a scoring function for the knowledge provided by SKE techniques involving the 3 indicators described in Section 2 (predictive performance, readability and coverage).
+As an example, we can consider a scoring function for the knowledge provided by SKE techniques involving the 3 indicators described in Section 2 (predictive performance, readability, and coverage).
 %
-We recall that knowledge has good quality if it has high predictive performance, high readability and high coverage.
+We recall that knowledge has good quality if it has high predictive performance, high readability, and high coverage.
 %
 An effective score may be formulated by multiplying 3 distinct, numerical metrics, one per indicator.
 %
 As a result, when performing a comparison, the knowledge having the highest score is the one having the best quality.
 %
-However, in this scenario, it is important to correctly weight the different indicators, and in particular to refine the fidelity/readability trade-off (i.e., how to penalise fidelity losses w.r.t.\ readability losses) on the basis of the task at hand and according to the user experience.
+However, in this scenario, it is important to correctly weight the different indicators, and in particular to refine the fidelity/readability trade-off (i.e., how to penalise fidelity losses w.r.t.\ readability losses) based on the task at hand and according to the user experience.
 %
 This may be achieved by introducing a human parametrisation acting on the individual indicators, that will be finally merged into a single multiplicative scoring function.
 
@@ -615,15 +615,15 @@ The corresponding decision boundaries are shown in Figures \ref{fig:cart6} to \r
 
 Considerations about the macrolevel knowledge readability can be drawn by analysing the plots in \Cref{fig:experiments}.
 %
-First of all, it is clearly noticeable that \cart{}, \gridex{} and \creepy{} with constant outputs introduce an undesired discretisation in the output predictions, thus implying a worsening in the overall predictive performance.
+First of all, it is noticeable that \cart{}, \gridex{} and \creepy{} with constant outputs introduce an undesired discretisation in the output predictions, thus implying a worsening in the overall predictive performance.
 %
-Conversely, \gridrex{} and \creepy{} with linear outputs are able to provide linear combinations of the input variables as output predictions, resulting in knowledge having fewer rules with smaller predictive errors.
+Conversely, \gridrex{} and \creepy{} with linear outputs can provide linear combinations of the input variables as output predictions, resulting in knowledge having fewer rules with smaller predictive errors.
 
-Observing the same plots it is clearly noticeable that \creepy{} outputs a hierarchical knowledge, thus mappable in an ordered list of rules.
+Observing the same plots it is noticeable that \creepy{} outputs a hierarchical knowledge, thus mappable in an ordered list of rules.
 %
 The same holds for \cart{}'s knowledge -- if simplified -- since it is based on a decision tree.
 %
-Differently, \gridex{} and \gridex{} provide rules associated with hypercubic and non-overlapping regions, so they are not ordered and each one contains the same amount of variable occurrences, predicates (i.e., interval inclusion) and constant values (i.e., 2 per variable).
+Differently, \gridex{} and \gridex{} provide rules associated with hypercubic and non-overlapping regions, so they are not ordered and each one contains the same amount of variable occurrences, predicates (i.e., interval inclusion), and constant values (i.e., 2 per variable).
 
 Macrolevel readability comparisons can be easily performed by observing the `Rules' column in \Cref{tab:experiments}.
 %
@@ -679,9 +679,9 @@ ise(BOVESPA, DAX, EM, EU, FTSE, NIKKEI, SP, ISE) :-
 ise(BOVESPA, DAX, EM, EU, FTSE, NIKKEI, SP, ISE) :- ISE is 0.01.
 \end{lstlisting}
 
-On one hand, the two versions of the \cart{}'s knowledge are totally equivalent in terms of predictive accuracy and input space coverage, i.e., they provide the same predictions.
+On one hand, the two versions of the \cart{}'s knowledge are equivalent in terms of predictive accuracy and input space coverage, i.e., they provide the same predictions.
 %
-However, the first has redundant literals, whereas the second has implicit constraints.
+However, the first has redundant literal, whereas the second has implicit constraints.
 %
 This means that, when measuring the knowledge microlevel readability, the first should be penalised for the presence of literals \emph{in single clauses} that are trivially true.
 %
@@ -706,7 +706,7 @@ The lack of a quantitative metric to evaluate the microlevel readability -- and 
 
 \section{Conclusions}
 
-In this paper we discuss the possible metrics to evaluate in a quantitative way the \emph{quality} of the symbolic knowledge extracted via SKE techniques out of a BB model as well as the need to define such metrics.
+In this paper, we discuss the possible metrics to evaluate in a quantitative way the \emph{quality} of the symbolic knowledge extracted via SKE techniques out of a BB model as well as the need to define such metrics.
 %
 We showed that quality evaluation should consider different indicators, namely: \textit{i)} predictive performance, \textit{ii)} input space coverage and \textit{iii)} knowledge readability.
 %
