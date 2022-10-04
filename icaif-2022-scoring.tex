@@ -19,7 +19,7 @@
 \acmDOI{XXXXXXX.XXXXXXX}
 
 %% These commands are for a PROCEEDINGS abstract or paper.
-\acmConference[ICAIF '22]{Workshop on Explainable AI in Finance}{November 2, 2022}{New York, NY}
+\acmConference[XAI-FIN-2022]{Workshop on Explainable AI in Finance}{November 2, 2022}{New York, NY}
 %\acmPrice{15.00}
 %\acmISBN{978-1-4503-XXXX-X/18/06}
 
@@ -124,7 +124,7 @@
 
 Artificial Intelligence (AI) for finance is a reality including, but not limited to, consumer credit, credit risk, and anti-money laundering applications \cite{aziz2019machine}. 
 %
-Usually, to obtain high predictive capabilities, machine learning techniques exploited for predictions rely on sub-symbolic techniques, that offer advantages related to performances but some drawbacks~\cite{rocha2012far}.
+Usually, to obtain high predictive capabilities, machine learning techniques exploited for predictions rely on sub-symbolic techniques, that offer advantages related to performances but also come along with some drawbacks~\cite{rocha2012far}.
 %
 The main drawback lies in the opacity of these models, which are obscure in the decisions they make and lack human interpretability.
 %
@@ -134,7 +134,7 @@ When dealing with critical applications -- such as the finance ones -- lack of h
 %
 Finance is a domain where trustworthiness must be ensured \cite{ng2015ethical}. Unique ethical, legal, and regulatory challenges arise as decisions can immediately impact people's lives \cite{weiss2021business}. 
 %
-However, it is still unclear how to implement and test trustworthy AI systems in practice. Following the definition of the High-Level Expert Group on AI \cite{egtai} trustworthy AI should satisfy three main pillars: comply with all applicable laws and regulations (\emph{lawfulness}), adhere to ethical principles and values (\emph{ethicality}), and be safe, secure and reliable (\emph{robustness}). However, how to translate these principles into practice is still an open question \cite{mittelstadt2019principles}.
+However, it is still unclear how to implement and test trustworthy AI systems in practice. Following the definition of the High-Level Expert Group on AI \cite{egtai}, trustworthy AI should satisfy three main pillars: comply with all applicable laws and regulations (\emph{lawfulness}), adhere to ethical principles and values (\emph{ethicality}), and be safe, secure and reliable (\emph{robustness}). However, how to translate these principles into practice is still an open question \cite{mittelstadt2019principles}.
 %
 A possible step towards trustworthy AI is to develop explainable AI (XAI), as explainability is one of the 7 more specific requirements that refine the main pillars \cite{egtai}. XAI aims to create insight into how and why AI models produce predictions while maintaining high predictive performance levels.
 %
@@ -158,7 +158,7 @@ Different strategies are present in the literature to tackle XAI via explainable
 %
 \begin{inlinelist}
 	\item human-interpretable models, such as shallow decision trees~\cite{Rudin2019}; or
-	\item symbolic knowledge extraction (SKE) techniques to the BB~\cite{KENNY2021103459}.
+	\item symbolic knowledge-extraction (SKE) techniques to the BB~\cite{KENNY2021103459}.
 \end{inlinelist}
 %
 While \textit{i)} is not always applicable, \textit{ii)} is gaining a momentum. The amount of SKE algorithms available in the literature is constantly increasing, also thanks to the software support provided by object-oriented frameworks for machine learning as well as to the development of dedicated frameworks (e.g., \psyke{}~\cite{psyke-woa2021,psyke-ia2022,psyke-extraamas2022}).
@@ -209,7 +209,7 @@ It is quite easy to evaluate the knowledge predictive performance with the same 
 %
 Adequate scoring metrics are, for instance, the accuracy and F$_1$ scores for classification tasks and the mean absolute/squared error and R$^2$ score for regression tasks.
 %
-This indicator is pretty relevant since it represents the best way to assess if the knowledge is suitable to draw predictions.
+This indicator is pretty relevant since it represents the best way to assess if the knowledge is suitable to draw predictions in lieu of the BB.
 
 The input space coverage can also be measured trivially, e.g., by observing how many data set instances are covered by the extracted rules, or by performing some kind of equal-spaced or random sampling inside the input space and then checking how many data points are covered.
 %
@@ -225,7 +225,7 @@ On the one hand, we can consider the \emph{macrolevel} of readability of the kno
 %
 On the other hand, we can focus on the \emph{microlevel} of readability, to recursively take into account the same indicators -- shape and complexity -- for each element in the knowledge.
 %
-As an example of the microlevel consider for instance the kind of preconditions of each element (e.g., oblique rules, \mofn{} tree nodes) and how many variables, constants, and predicates appear inside them.
+As an example of the microlevel we can consider for instance the kind of preconditions of each element (e.g., oblique rules, \mofn{} tree nodes) and how many variables, constants, and predicates appear inside them.
 %
 As can be noticed, this is far from being a trivial task, since equivalent concepts may be represented according to different notations, each one having its conciseness and expressiveness.
 %
@@ -267,7 +267,7 @@ Finally, rule lists may be ordered -- when rule number $n$ is evaluated only if 
 %
 Human readability is strongly impacted by the list ordering since human users must be conscious that a rule can be selected only if all the preceding have been already tested.
 %
-In other words, rules' number $n$ implicitly carries along information about the preconditions of other distinct $n-1$ rules, i.e., implicit information that is inherently coded within the ordering.
+In other words, the $n$-th rule implicitly carries along information about the preconditions of other distinct $n-1$ rules, i.e., implicit information that is inherently coded within the ordering.
 %
 To give an example, the fourth rule in an unordered set may be something like ``output is $post_4$ if $pre_4$'', and humans can read and apply the rule as is.
 %
@@ -275,7 +275,7 @@ We remark that $pre_i$ and $post_i$ are the precondition and postcondition, resp
 %
 The same rule in an ordered set should be considered by humans as ``output is $post_4$ if $pre_4, not(pre_3), not(pre_2), not(pre_1)$'', where $not(pre)$ is true if $pre$ is not satisfied and the comma operator represents logical conjunction.
 %
-Of course, the readability of ordered sets is hindered by this consideration, especially for a large number of rules.
+Of course, the readability of ordered sets is hindered by this consideration, especially for a large amount of rules.
 
 \paragraph{Decision trees}
 
@@ -324,6 +324,168 @@ The equivalent list will have different individual rules -- e.g., more complex t
 In this way, it is possible to perform a fair comparison amongst different knowledge shapes by only focusing on the macrolevel complexity and further considerations about the microlevel.
 %
 During a macrolevel readability assessment, knowledge having smaller complexity (i.e., fewer rules) should be preferred over other solutions.
+
+\subsection{Microlevel: individual rules}
+
+When extracting knowledge, SKE techniques output rules adhering to different representations for both preconditions and postconditions.
+%
+Amongst the most widespread kinds of rule preconditions we can find propositional, \mofn{}~\cite{TowellS91,murphy1991id2}, fuzzy~\cite{HorikawaFU92,Berenji91} and oblique~\cite{Setiono00,SetionoL97} literals.
+%
+In any case, preconditions are expressed as a conjunction, or disjunction, of literals having one of these different formats.
+%
+On the other hand, postconditions are constant values or functions of the input variables.
+
+\subsubsection{Rule preconditions}
+
+\paragraph{Propositional rules}
+
+The most adopted rule format is the propositional one, where literals are simple predicates expressing equalities (in positive or negative form) or inequalities between the value of an input feature and one or more constants.
+%
+The basic notations for equalities and inequalities are $X = u$, $Y \neq v$; $Z \lessgtr w$, where $X,Y,Z$ are input features and $u,v,w$ are constant values.
+%
+Basic literals may be extended to interval and set inclusion/exclusion, to group together disjunctions or conjunctions of a set of literals.
+
+This first step to achieve better conciseness comes along with a major readability issue.
+%
+Indeed, a knowledge may contain two rules having the same output and only one precondition each, composed of a basic literal involving the same variable but compared to different constants, for instance ``output is $A$ if $color=blue$'' and ``output is $A$ if $color=red$''.
+%
+Rules of this kind may be collapsed into a single rule: ``output is $A$ if $color=blue$ or $color=red$''.
+%
+But this is not the only solution, since the rule ``output is $A$ if $color \in \{blue,red\}$'' is also equivalent.
+
+Starting from a trivial example it is easy to notice that even one categorical feature assuming at least 2 distinct values leads to 3 different knowledge representations, all equivalent.
+%
+The readability of an output knowledge should be proportional to the effort required by a human user to understand and apply its rules.
+%
+In this case, the first knowledge has 2 rules, 2 variable occurrences and as many predicates and constants.
+%
+The second has 1 rule and the same values for other indicators.
+%
+The third knowledge has 1 rule, 1 variable occurrence, 1 predicate, and 2 constant values.
+%
+Obviously, it is preferable to have 1 rule, and this is decided via macrolevel considerations.
+%
+Amongst the second and third knowledge rules, there is not a substantial readability difference, since both of them imply the human user to evaluate the $X$ variable and compare it with two constant values.
+%
+As a result, we obtain that a raw counting of variable occurrences, predicates, and constants is not suitable to express microlevel readability, even though they are perfect indicators for rule conciseness (in this case the fewer, the better).
+%
+Furthermore, one may observe that the more a rule adopts concise literals, the more it is difficult to understand the rule and to associate a readability score to it, as shown in the following.
+
+\paragraph{\mofn{} rules}
+
+Literals may be expressed as groups, where the group is satisfied if at least one of the possible constraints is satisfied, as shown in the previous paragraph.
+%
+This definition may be further relaxed, and a group of $N$ literals can be considered as satisfied if at least $M$ constraints are satisfied ($M\leq N$).
+%
+\mofn{} rules are exactly defined in this manner.
+%
+They enable a much higher degree of conciseness, however, our opinion is that human users encounter more difficulties in understanding the rule.
+%
+As an example, one may think about a 4-of-9 rule.
+
+Large $N$ values also obfuscate the real impact of individual variables on the final prediction.
+%
+Furthermore, it is quite challenging mapping \mofn{} rules to readability scores, since their readability decreases w.r.t.\ both $M$ and $N$.
+%
+For instance, 1-of-5 rules are more easily understandable than 3-of-5 or 1-of-10 rules.
+%
+But analogous claims about 5-of-9 vs. 4-of-10 rules cannot be easily stated.
+
+\paragraph{Fuzzy rules}
+
+If sets and intervals in preconditions are substituted with string labels and these labels correspond to the belonging to a defined set/interval within a certain confidence degree, rules are called fuzzy.
+%
+For instance, ``$X \in [0.3, 0.6]$'' could be equivalent to ``$X$ is $medium$'', by assuming the $X$ variable ranging in the [0, 1] interval.
+%
+The conciseness of this notation allows literals to have more flexible intervals (e.g., also [0.45, 0.65] could be considered as $medium$, with a different degree of confidence).
+%
+Outputs associated with fuzzy rules also have a confidence degree, depending on the one of corresponding preconditions.
+%
+As a consequence, human users reading a fuzzy rule need to
+%
+\begin{inlinelist}
+	\item be aware of the underlying fuzzy labelling semantics;
+	\item assign a degree of confidence to each literal in the rule precondition;
+	\item read the postcondition and calculate the corresponding confidence.
+\end{inlinelist}
+%
+We believe that it would be far less readable than a direct, simple basic notation.
+%
+Since it is not possible to numerically assess the introduced human-interpretability hindrance, it is also hard to assign a readability score to fuzzy rules.
+
+\paragraph{Oblique rules}
+
+When dealing with numerical attributes, rule literals may be expressed as inequalities involving a linear combination of the input variables and a constant threshold.
+%
+On the input feature space, these rules represent oblique hyperplanes.
+
+Knowledge conciseness benefits from the application of oblique rules since composite features are enabled, however, in our opinion, human readability pays a high price.
+%
+One may think about the description of a concrete object to be classified.
+%
+Such an object may be represented through weight, volume, and position.
+%
+Classification involving input features separately is easy for humans.
+%
+The same is not true if human users have to consider, for instance, a linear combination of weight and position.
+%
+For this reason, the same final considerations about the fuzzy rule readability hindrance also hold for oblique rules.
+
+\subsubsection{Rule postconditions}
+
+\paragraph{Constant values}
+
+The most simple and human-readable postcondition is represented by a constant value, suitable for both classification and regression tasks, since it may be a string label as well as a numerical value.
+%
+However, constant values are not always the best solutions when dealing with regression data sets, especially if the output feature is strongly correlated to the input variables.
+%
+The reason is that constant values introduce an undesired discretisation that usually leads to the creation of many rules with poor predictive performance.
+
+\paragraph{Non-constant postconditions}
+
+Also for postconditions, as for preconditions, there is the possibility to choose more expressive representations, at the expense of human readability.
+%
+Indeed, constant predictions can be substituted with linear combinations or other kinds of functions involving (a subset of) the input features.
+%
+In this case, human readability is hindered by the length of the representation (e.g., a linear combination of 2 variables is more immediate than a combination of 5 variables) and its type (e.g., a linear combination is more comprehensible than a polynomial function).
+%
+The means to associate these representations with readability scores is still an open issue.
+
+\subsubsection{Microlevel observations}
+
+While the macrolevel knowledge complexity is quite easy to be assessed, the same does not hold at the microlevel, because of the variety of adopted rule notations.
+%
+Different SKE algorithms adopt different notations and each one comes with its proper conciseness and human-interpretability degree.
+%
+Unfortunately, it is not possible to convert the various formats into a canonical, comparable notation and for this reason, the problem of assigning a readability score to individual rules is a major open issue in the assessment of the extracted knowledge quality.
+
+\subsection{User interaction}
+
+Since a quantitative assessment of the microlevel readability cannot be straightforwardly defined, a preliminary readability score formulation could take into account user feedback.
+%
+User interactions may drive such a score according to a custom \emph{desideratum} or a set of \emph{desiderata}.
+%
+For instance, propositional and \mofn{} rules may be preferred over fuzzy and oblique rules, and at the same time propositional rules may be preferred over the \mofn{} notation.
+%
+This solution may be achieved by assigning an \emph{ad hoc} weight to each rule category.
+
+The user interaction is also important when balancing different indicators concurring within the same scoring metric.
+%
+As an example, we can consider a scoring function for the knowledge provided by SKE techniques involving the 3 indicators described in Section 2 (predictive performance, readability, and completeness).
+%
+We recall that knowledge has good quality if it has high predictive performance, high readability, and high completeness.
+
+An effective score may be formulated by multiplying 3 distinct, numerical metrics, one per indicator.
+%
+As a result, when performing a comparison, the knowledge having the highest score is the one having the best quality.
+%
+However, in this scenario, it is important to correctly weight the different indicators, and in particular to refine the fidelity/readability trade-off (i.e., how to penalise fidelity losses w.r.t.\ readability losses) based on the task at hand and according to the user experience.
+%
+This may be achieved by introducing a human parametrisation acting on the individual indicators, that will be finally merged into a single multiplicative scoring function.
+%
+It is relevant noticing that the completeness is not task-dependent, since it may be represented as a percentage.
+%
+Conversely, the other indicators may be subject to a large variability, depending on the task at hand.
 
 \begin{figure*}[h]\centering
 	\subfloat[Data set.]{
@@ -380,164 +542,6 @@ During a macrolevel readability assessment, knowledge having smaller complexity 
 	}
 	\caption{Decision boundaries for the data set shown in \Cref{fig:data} obtained via the application of different extractors to the LR and RF predictors (cf. \Cref{fig:lr,fig:rf}, respectively).}\label{fig:experiments}
 \end{figure*}
-
-\subsection{Microlevel: rules}
-
-When extracting knowledge, SKE techniques output rules adhering to different representations for both preconditions and postconditions.
-%
-Amongst the most widespread kinds of rule preconditions we can find propositional, \mofn{}~\cite{TowellS91,murphy1991id2}, fuzzy~\cite{HorikawaFU92,Berenji91} and oblique~\cite{Setiono00,SetionoL97} literals.
-%
-In any case, preconditions are expressed as a conjunction, or disjunction, of literals having one of these different formats.
-%
-On the other hand, postconditions are constant values or functions of the input variables.
-
-\subsubsection{Rule preconditions}
-
-\paragraph{Propositional rules}
-
-The most adopted rule format is the propositional one, where literals are simple predicates expressing equalities (in positive or negative form) or inequalities between the value of an input feature and one or more constants.
-%
-The basic notations for equalities and inequalities are $X = u$, $Y \neq v$; $Z \lessgtr w$, where $X,Y,Z$ are input features and $u,v,w$ are constant values.
-%
-Basic literals may be extended to interval and set inclusion/exclusion, to group together a disjunction of a set of literals.
-
-This first step to achieving better conciseness comes along with a major readability issue.
-%
-Indeed, a knowledge may contain two rules having the same output and only one precondition each, composed of a basic literal involving the same variable but compared to different constants, for instance ``output is $A$ if $color=blue$'' and ``output is $A$ if $color=red$''.
-%
-Rules of this kind may be collapsed into a single rule: ``output is $A$ if $color=blue$ or $color=red$''.
-%
-But this is not the only solution, since the rule ``output is $A$ if $color \in \{blue,red\}$'' is also equivalent.
-
-Starting from a trivial example it is easy to notice that even one categorical feature assuming at least 2 distinct values leads to 3 different knowledge representations, all equivalent.
-%
-The readability of an output knowledge should be proportional to the effort required by a human user to understand and apply its rules.
-%
-In this case, the first knowledge has 2 rules, 2 variable occurrences and as many predicated and constants.
-%
-The second has 1 rule and the same values for other indicators.
-%
-The third knowledge has 1 rule, 1 variable occurrence, 1 predicate, and 2 constant values.
-%
-Obviously, it is preferable to have 1 rule, and this is decided via macrolevel considerations.
-%
-Amongst the second and third knowledge rules, there is not a substantial readability difference, since both of them imply the human user to evaluate the $X$ variable and compare it with two constant values.
-%
-As a result, we obtain that a raw counting of variable occurrences, predicates, and constants is not suitable to express microlevel readability, even though they are perfect indicators for rule conciseness (in this case the fewer, the better).
-%
-Furthermore, one may observe that the more a rule adopts concise literal, the more it is difficult to understand the rule and to associate a readability score to it, as shown in the following.
-
-\paragraph{\mofn{} rules}
-
-Literals may be expressed as groups, where the group is satisfied if at least one of the possible constraints is satisfied, as shown in the previous paragraph.
-%
-This definition may be further relaxed, and a group of $N$ literals can be considered as satisfied if at least $M$ constraints are satisfied.
-%
-\mofn{} rules are exactly defined in this manner.
-%
-They enable a much higher degree of conciseness, however, our opinion is that human users encounter more difficulties in understanding the rule.
-%
-As an example, one may think about a 4-of-9 rule.
-
-Large $N$ values also obfuscate the real impact of individual variables on the final prediction.
-%
-Furthermore, it is quite challenging mapping \mofn{} rules to readability scores, since their readability decreases w.r.t.\ both $M$ and $N$.
-%
-For instance, 1-of-5 rules are more easily understandable than 3-of-5 or 1-of-10 rules.
-%
-But analogous claims about 5-of-9 vs. 4-of-10 rules cannot be easily stated.
-
-\paragraph{Fuzzy rules}
-
-If sets and intervals in preconditions are substituted with string labels and these labels correspond to the belonging to a defined set/interval within a certain confidence degree, rules are called fuzzy.
-%
-For instance, ``$X \in [0.3, 0.6]$'' could be equivalent to ``$X$ is $medium$'', by assuming the $X$ variable ranging in the [0, 1] interval.
-%
-The conciseness of this notation allows literals to have more flexible intervals (e.g., also [0.45, 0.65] could be considered as $medium$, with a different degree of confidence).
-%
-Outputs associated with fuzzy rules also have a confidence degree, depending on the one of corresponding preconditions.
-%
-As a consequence, human users reading a fuzzy rule need to
-%
-\begin{inlinelist}
-	\item be aware of the underlying fuzzy labelling semantics;
-	\item assign a degree of confidence to each literal in the rule precondition;
-	\item read the postcondition and calculate the corresponding confidence.
-\end{inlinelist}
-%
-We believe that it would be far more readable than a direct, simple basic notation.
-%
-Since it is not possible to numerically assess the introduced human-interpretability hindrance, it is also hard to assign a readability score to fuzzy rules.
-
-\paragraph{Oblique rules}
-
-When dealing with numerical attributes, rule literals may be expressed as inequalities involving a linear combination of the input variables and a constant threshold.
-%
-On the input feature space, these rules represent oblique hyperplanes.
-
-Knowledge conciseness benefits from the application of oblique rules since composite features are enabled, however, in our opinion, human readability pays a high price.
-%
-One may think about the description of a concrete object to be classified.
-%
-Such an object may be represented through weight, volume, and position.
-%
-Classification involving input features separately is easy for humans.
-%
-The same is not true if human users have to consider, for instance, a linear combination of weight and position.
-%
-For this reason, the same final considerations about the fuzzy rule readability hindrance also hold for oblique rules.
-
-\subsubsection{Rule postconditions}
-
-\paragraph{Constant values}
-
-The most simple and human-readable postcondition is represented by a constant value, suitable for both classification and regression tasks, since it may be a string label as well as a numerical value.
-%
-However, constant values are not always the best solutions when dealing with regression data sets, especially if the output feature is strongly correlated to the input variables.
-%
-The reason is that constant values introduce an undesired discretisation that usually leads to creating many rules with poor predictive performance.
-
-\paragraph{Non-constant postconditions}
-
-As for preconditions, also for postconditions, there is the possibility to choose more expressive representations, at the expense of human readability.
-%
-Indeed, constant predictions can be substituted with linear combinations or other kinds of functions involving (a subset of) the input features.
-%
-In this case, human readability is hindered by the length of the representation (e.g., a linear combination of 2 variables is more immediate than a combination of 5 variables) and its type (e.g., a linear combination is more comprehensible than a polynomial function).
-%
-The means to associate these representations with readability scores is still an open issue.
-
-\subsubsection{Microlevel observations}
-
-While the macrolevel knowledge complexity is quite easy to be assessed, the same does not hold at the microlevel, because of the variety of adopted rule notations.
-%
-Different SKE algorithms adopt different notations and each one comes with its proper conciseness and human-interpretability degree.
-%
-Unfortunately, it is not possible to convert the various formats into a canonical, comparable notation and for this reason, the problem of assigning a readability score to individual rules is a major open issue in the assessment of the extracted knowledge quality.
-
-\subsection{User interaction}
-
-Since a quantitative assessment of the microlevel readability cannot be straightforwardly defined, a preliminary readability score formulation could take into account user feedback.
-%
-User interactions may drive such a score according to a custom \emph{desideratum} or a set of \emph{desiderata}.
-%
-For instance, propositional and \mofn{} rules may be preferred over fuzzy and oblique rules, and at the same time propositional rules may be preferred over the \mofn{} notation.
-%
-This solution may be achieved by assigning an \emph{ad hoc} weight to each rule category.
-
-The user interaction is also important when balancing different indicators concurring within the same scoring metric.
-%
-As an example, we can consider a scoring function for the knowledge provided by SKE techniques involving the 3 indicators described in Section 2 (predictive performance, readability, and coverage).
-%
-We recall that knowledge has good quality if it has high predictive performance, high readability, and high coverage.
-%
-An effective score may be formulated by multiplying 3 distinct, numerical metrics, one per indicator.
-%
-As a result, when performing a comparison, the knowledge having the highest score is the one having the best quality.
-%
-However, in this scenario, it is important to correctly weight the different indicators, and in particular to refine the fidelity/readability trade-off (i.e., how to penalise fidelity losses w.r.t.\ readability losses) based on the task at hand and according to the user experience.
-%
-This may be achieved by introducing a human parametrisation acting on the individual indicators, that will be finally merged into a single multiplicative scoring function.
 
 \section{The Istanbul Stock Exchange Data Set Example}
 
@@ -623,13 +627,13 @@ Observing the same plots it is noticeable that \creepy{} outputs a hierarchical 
 %
 The same holds for \cart{}'s knowledge -- if simplified -- since it is based on a decision tree.
 %
-Differently, \gridex{} and \gridex{} provide rules associated with hypercubic and non-overlapping regions, so they are not ordered and each one contains the same amount of variable occurrences, predicates (i.e., interval inclusion), and constant values (i.e., 2 per variable).
+Differently, \gridex{} and \gridrex{} provide rules associated with hypercubic and non-overlapping regions, so they are not ordered and each one contains the same amount of variable occurrences, predicates (i.e., interval inclusion), and constant values (i.e., 2 per variable).
 
 Macrolevel readability comparisons can be easily performed by observing the `Rules' column in \Cref{tab:experiments}.
 %
-\gridrex{} is the best choice since it outputs a single rule, followed by the \creepy{}.% instance without output discretisation.
+\gridrex{} is the best choice since it outputs a single rule, followed by the \creepy{}. % instance without output discretisation.
 %
-Their superiority is confirmed also from the predictive performance point of view since they have the highest R$^2$ score.
+Their superiority is confirmed also from the predictive performance standpoint, since they have the highest R$^2$ score.
 %
 \gridrex{} doesn't meet the completeness requirement, i.e., results are non-exhaustive in the input space coverage since a portion is considered negligible due to the absence of training instances (so there are test instances that cannot be predicted). This should penalise the final metric score.
 
@@ -681,7 +685,7 @@ ise(BOVESPA, DAX, EM, EU, FTSE, NIKKEI, SP, ISE) :- ISE is 0.01.
 
 On one hand, the two versions of the \cart{}'s knowledge are equivalent in terms of predictive accuracy and input space coverage, i.e., they provide the same predictions.
 %
-However, the first has redundant literal, whereas the second has implicit constraints.
+However, the first has redundant literals, whereas the second has implicit constraints.
 %
 This means that, when measuring the knowledge microlevel readability, the first should be penalised for the presence of literals \emph{in single clauses} that are trivially true.
 %
@@ -702,13 +706,13 @@ On the other hand, by comparing \cart{}'s and \creepy{}'s extracted knowledge it
 %
 An ideal microlevel readability metric should be able to assign a score taking into account these differences.
 %
-The lack of a quantitative metric to evaluate the microlevel readability -- and thus the overall knowledge readability -- makes it impracticable to automatically decide whether longer rule lists with simple outputs are preferable or not over shorter lists with more complex outputs.
+The lack of a quantitative metric to evaluate the microlevel readability -- and thus the overall knowledge readability and, in turn, quality -- makes it impracticable to automatically decide whether longer rule lists with simple outputs are preferable or not over shorter lists with more complex outputs.
 
 \section{Conclusions \& discussion}
 
-In this paper, we discuss the possible metrics to evaluate in a quantitative way the \emph{quality} of the symbolic knowledge extracted via SKE techniques out of a BB model as well as the need to define such metrics.
+In this paper we discuss the major issues in defining possible metrics to evaluate in a quantitative way the \emph{quality} of the symbolic knowledge extracted via SKE techniques out of a BB model as well as the need to define such metrics.
 %
-We showed that quality evaluation should consider different indicators, namely: \textit{i)} predictive performance, \textit{ii)} input space coverage and \textit{iii)} knowledge readability.
+We show that quality evaluation should consider different indicators, namely: \textit{i)} predictive performance, \textit{ii)} input space coverage and \textit{iii)} knowledge readability.
 %
 While for the first two the definition of a metric and the comparison of a score is quite trivial, this does not happen for the last one.
 %
@@ -718,13 +722,15 @@ We showed that at a macrolevel the knowledge may be easily compared since it is 
 %
 Conversely, we pointed out the most tricky characteristics of microlevel considerations, to favour further studies and discussion on the topic.
 
-Future works will be devoted to the definition of such a suitable metric to assess knowledge extracted via SKEs quality in a fair, quantitative, and measurable way.
+Future works will be devoted to the definition of such a suitable metric to assess the quality of knowledge extracted via SKE in a fair, quantitative, and measurable way.
 %
-In particular, we plan to formulate a sound scoring function for microlevel comparisons and to study how the user interaction may help the customisation and integration of the 3 aforementioned indicators in a unique and effective metric assessing the quality of knowledge.
+In particular, we plan to formulate a sound scoring function for microlevel comparisons and to study how the user interaction may help the customisation and integration of the 3 aforementioned indicators in a unique and effective metric assessing the knowledge quality.
 
-Moreover adherence to the trustworthy AI requirements should be enlarged to evaluate also other requirements and in particular, our findings might be subject to change due to the institutional debate about the AI Act Proposal. Further research is needed to consolidate the interpretation of the Act in light of its future changes and to define metrics that can be used in the course of the standardisation process while being respectful of the AI Act and its Annexes.
+Moreover, adherence to the trustworthy AI requirements should be enlarged to evaluate also other requirements and, in particular, our findings might be subject to change due to the institutional debate about the AI Act Proposal. Further research is needed to consolidate the interpretation of the Act in light of its future changes and to define metrics that can be used in the course of the standardisation process while being respectful of the AI Act and its Annexes.
 
-Another open question to be left to further research is to take into account that the definition of explainability metrics may lead to taking into account concurring features that are compliant with the legislative goals of the AI Act and, eventually, the thresholds that meet the Act’s requirements and expectations. Each feature needs to be balanced via parameters that can be set taking into consideration both the scenario at hand and its regulation. This is the first step for converging to trustworthy auto ML techniques that we believe to be promising in the near future.
+Another open question left to further research is to take into account that the definition of explainability metrics may lead to consider concurring features that are compliant with the legislative goals of the AI Act and, eventually, the thresholds that meet the Act’s requirements and expectations.
+%
+Each feature needs to be balanced via parameters that can be set taking into consideration both the scenario at hand and its regulation. This is the first step for converging to trustworthy automated machine learning techniques that we believe to be promising in the near future.
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
